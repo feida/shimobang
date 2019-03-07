@@ -32,7 +32,8 @@ export default {
   },
   data() {
     return {
-      chart: null
+      chart: null,
+      legend: []
     }
   },
   mounted() {
@@ -50,7 +51,7 @@ export default {
     initChart() {
       this.chart = echarts.init(document.getElementById(this.id))
       const option = {
-        backgroundColor: '#fff',
+        backgroundColor: '#f9f9f9',
         /* title: {
          top: 20,
          text: 'Requests',
@@ -81,7 +82,8 @@ export default {
           itemGap: 13,
           // data: ['CMCC', 'CTCC', 'CUCC'],
           // data: this.charts_data.legend,
-          data: ['庆阳市', '武威市', '益阳市', '金华市']
+          // data: ['庆阳市', '武威市', '益阳市', '金华市']
+          data: this.legend
           /* right: '4%',
           textStyle: {
             fontSize: 12,
@@ -89,7 +91,7 @@ export default {
           }*/
         },
         grid: {
-          top: 70,
+          top: 100,
           left: '0%',
           right: '4%',
           bottom: '2%',
@@ -131,9 +133,10 @@ export default {
         v.type = 'line'
         v.stack = '总量' + i
         // v.data = v.value
+        this.legend.push(v.name)
       })
       option.series = this.charts_data.series
-      // console.log('option', option)
+      console.log('option', option)
       this.chart.setOption(option)
     }
   }

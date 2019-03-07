@@ -4,8 +4,8 @@
       <img src="../../../assets/images/Resto+.png" style="width: 165px;height: 60px;" alt="">
     </span>
     <div class="avatar-container">
-      <el-button type="primary" round size="mini"><a href="http://www.baidu.com">登陆</a></el-button>
-      <el-button type="primary" round size="mini">注册</el-button>
+      <el-button type="primary" round size="mini"><a href="http://www.baidu.com" target="_blank">登陆</a></el-button>
+      <el-button type="primary" round size="mini" @click="push()">注册</el-button>
     </div>
   </div>
 </template>
@@ -25,7 +25,9 @@ export default {
 
   },
   methods: {
-
+    push() {
+      this.$router.push('/login')
+    }
   }
 }
 </script>

@@ -13,10 +13,10 @@
     <div class="menuTitle">
       <span>在线采购</span>
     </div>
-    <el-collapse  @change="handleChange">
+    <el-collapse @change="handleChange">
       <el-collapse-item v-for=" (item,index) in shopListData" :title="item.shop_category" :key="'shop_category'+ index">
-        <div class="list" v-for=" (m,n) in item.data_list" :key="'data_list' + n">
-          <span>{{m.shop_name}}</span>
+        <div v-for=" (m,n) in item.data_list" :key="'data_list' + n" class="list">
+          <span>{{ m.shop_name }}</span>
           <div>
             <el-button round size="mini">议价</el-button>
             <el-button round size="mini">立即采购</el-button>
@@ -71,7 +71,7 @@ export default {
       activeName2: 'first',
       activeNames: ['1'],
       tabChartsData: [],
-      shopListData: [],
+      shopListData: []
     }
   },
   computed: {

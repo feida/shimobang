@@ -3,7 +3,7 @@
     <el-form ref="loginForm" :model="loginForm" :rules="loginRules" class="login-form" auto-complete="on" label-position="left">
       <div class="logo">
         <!-- <a href="/"><img src="../../assets/images/Resto+.png" alt=""></a> -->
-        <h1>BI</h1>
+        <h1>盟碳</h1>
       </div>
       <div class="title-container">
         <!-- <h3 class="title" >欢迎使用上海餐加企业系统</h3> -->
@@ -161,6 +161,7 @@ $dark_gray:#889aa4;
 $light_gray:#eee;
 .login-container {
   position: fixed;
+  left: 0;
   height: 100%;
   width: 100%;
   background-color: $bg;

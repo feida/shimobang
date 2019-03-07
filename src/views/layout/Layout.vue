@@ -57,6 +57,9 @@ export default {
     position: absolute;
     z-index: 999;
   }
+  .main-container {
+    //background-color: #eee;
+  }
   .footer {
     //height: 100px;
     text-align: center;

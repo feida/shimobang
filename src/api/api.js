@@ -48,7 +48,7 @@ export function getTabcharts() {
   })
 }
 
-//采购列表
+// 采购列表
 export function getShopList() {
   return request({
     url: '/mengtan/shop_list',
