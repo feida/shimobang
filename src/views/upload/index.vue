@@ -241,7 +241,7 @@
 </template>
 
 <script>
-import { downLoad } from '@/api/login'
+import { downLoad } from '@/api/api'
 import { getToken } from '@/utils/auth'
 export default {
   name: 'Upload',

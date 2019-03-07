@@ -9,7 +9,7 @@
 <script>
 import bus from '../../../../utils/bus'
 import { cmparedArr } from '../../../../utils'
-import { getMenus } from '@/api/login'
+import { getMenus } from '@/api/api'
 import { mapGetters } from 'vuex'
 export default {
   name: 'SidebarItem',

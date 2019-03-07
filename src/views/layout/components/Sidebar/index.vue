@@ -28,7 +28,7 @@ import bus from '../../../../utils/bus'
 import { mapGetters } from 'vuex'
 import SidebarItem from './SidebarItem'
 import { cmparedArr } from '../../../../utils'
-import { getMenus } from '@/api/login'
+import { getMenus } from '@/api/api'
 export default {
   components: { SidebarItem },
   data() {

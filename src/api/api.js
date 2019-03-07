@@ -39,3 +39,19 @@ export function getMenus() {
     method: 'get'
   })
 }
+
+// tabcharts
+export function getTabcharts() {
+  return request({
+    url: '/mengtan/tab_charts',
+    method: 'get'
+  })
+}
+
+//采购列表
+export function getShopList() {
+  return request({
+    url: '/mengtan/shop_list',
+    method: 'get'
+  })
+}
