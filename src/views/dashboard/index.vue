@@ -154,7 +154,48 @@ export default {
     position: relative;
     width: 100%;
     height: calc(100vh - 84px);
-    //height: width/2;
-    //height: 300px;
+  }
+  @media only screen and (max-width: 600px) {
+    .chart-container{
+      position: relative;
+      width: 100%;
+      height: calc(100vw * 3/4);
+    }
+  }
+
+  @media only screen and (min-width: 600px) {
+    .chart-container{
+      position: relative;
+      width: 100%;
+      height: calc(100vw * 3/4);
+    }
+  }
+
+  @media only screen and (min-width: 768px) {
+    .chart-container{
+      position: relative;
+      width: 100%;
+      height: calc(100vw / 3);
+      //height: calc(100vh - 84px);
+    }
+  }
+
+  @media only screen and (min-width: 992px) {
+    .chart-container{
+      position: relative;
+      width: 100%;
+      //height: calc(100vh - 84px);
+      height: calc(100vw / 3);
+      //height: calc(100vw * 3/4);
+    }
+  }
+
+  @media only screen and (min-width: 1200px) {
+    .chart-container{
+      position: relative;
+      width: 100%;
+      height: calc(100vw / 3);
+      //height: calc(100vh - 84px);
+    }
   }
 </style>
