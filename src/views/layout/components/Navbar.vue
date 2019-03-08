@@ -1,10 +1,12 @@
 <template>
   <div class="navbar" >
     <span>
-      <img src="../../../assets/images/Resto+.png" style="width: 165px;height: 60px;" alt="">
+      <!--<img src="../../../assets/images/Resto+.png" style="width: 165px;height: 60px;" alt="">-->
+      <span style="display: inline-block; width: 160px; height: 60px; border: 1px solid #eee; text-align: center">LOGO</span>
     </span>
     <div class="avatar-container">
-      <el-button type="primary" round size="mini"><a href="http://www.baidu.com" target="_blank">登陆</a></el-button>
+      <!--<el-button type="primary" round size="mini"><a href="http://www.baidu.com" target="_blank">登陆</a></el-button>-->
+      <el-button type="primary" round size="mini" @click="push()">登陆</el-button>
       <el-button type="primary" round size="mini" @click="push()">注册</el-button>
     </div>
   </div>

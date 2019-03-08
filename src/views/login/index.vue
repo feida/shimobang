@@ -96,15 +96,16 @@ export default {
       }
     },
     handleLogin() {
-      this.$refs.loginForm.validate(valid => {
+      this.$router.push({ path: this.redirect || '/' })
+      /*this.$refs.loginForm.validate(valid => {
         if (valid) {
           this.loading = true
           this.$store.dispatch('Login', this.loginForm).then(() => {
             this.loading = false
             this.$router.push({ path: this.redirect || '/' })
-            /* this.$store.dispatch('GetMenus').then(() => {
+            /!* this.$store.dispatch('GetMenus').then(() => {
 
-            })*/
+            })*!/
           }).catch(() => {
             this.loading = false
           })
@@ -112,7 +113,7 @@ export default {
           console.log('error submit!!')
           return false
         }
-      })
+      })*/
     }
   }
 }

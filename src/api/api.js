@@ -55,3 +55,11 @@ export function getShopList() {
     method: 'get'
   })
 }
+
+// 新闻列表
+export function getNewsList() {
+  return request({
+    url: '/mengtan/news_list',
+    method: 'get'
+  })
+}
