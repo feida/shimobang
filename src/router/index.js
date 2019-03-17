@@ -35,8 +35,19 @@ export const constantRouterMap = [
       component: () => import('@/views/dashboard/index')
     }]
   },
-  { path: '/login', component: () => import('@/views/login/index'), hidden: true },
-  { path: '/upload', component: () => import('@/views/upload/index'), hidden: true },
+  {
+    path: '/form',
+    component: Layout,
+    children: [
+      {
+        path: 'index',
+        name: 'Form',
+        component: () => import('@/views/form/index'),
+        meta: { title: 'Form', icon: 'form' }
+      }
+    ]
+  },
+  // { path: '/upload', component: () => import('@/views/upload/index'), hidden: true },
   { path: '/404', component: () => import('@/views/404'), hidden: true },
   { path: '*', redirect: '/404', hidden: true }
 ]

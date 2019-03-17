@@ -1,4 +1,4 @@
-import { login, getMenus } from '@/api/api'
+import { getInfo } from '@/api/api'
 import { getToken, setToken, removeToken, setCookie, removeCookie } from '@/utils/auth'
 
 const user = {
@@ -6,8 +6,7 @@ const user = {
     token: getToken(),
     name: '',
     loading: true,
-    menuData: [],
-    menuDataItem: {}
+    info: {}
   },
 
   mutations: {
@@ -20,8 +19,9 @@ const user = {
     SET_LOADING: (state, value) => {
       state.loading = value
     },
-    SET_MENUDATA: (state, menuData) => {
-      state.menuData = menuData
+    SET_INFO: (state, info) => {
+      console.log('set', info)
+      state.info = info
     },
     SET_MENUDATAITEM: (state, menuDataItem) => {
       state.menuDataItem = menuDataItem
@@ -29,18 +29,18 @@ const user = {
   },
 
   actions: {
-    // 登录
-    Login({ commit }, userInfo) {
-      const userName = userInfo.userName.trim()
+    // 基本资料
+    GetInfo({ commit }) {
       return new Promise((resolve, reject) => {
-        login(userName, userInfo.pwd).then(response => {
-          // console.log('登陆', response)
+        getInfo().then(response => {
+          console.log('基本资料', response)
           if (response) {
-            setToken(response.token)
+            commit('SET_INFO', response.data)
+            /*setToken(response.token)
             setCookie('userName', response.userName)
             setCookie('brandName', response.brandName)
             commit('SET_TOKEN', response.token)
-            commit('SET_NAME', response.userName)
+            commit('SET_NAME', response.userName)*/
             resolve()
           }
         }).catch(error => {
@@ -77,23 +77,6 @@ const user = {
             resolve({})
           }
         })
-      })
-    },
-
-    // 保存menuData 列表数据
-    SetMenuData({ commit }, data) {
-      return new Promise(resolve => {
-        commit('SET_MENUDATA', data)
-        resolve()
-      })
-    },
-
-    // 列表item数据
-    SetMenuDataItem({ commit }, data) {
-      return new Promise(resolve => {
-        // console.log('data______', JSON.stringify(data))
-        commit('SET_MENUDATAITEM', data)
-        resolve()
       })
     }
   }

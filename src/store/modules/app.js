@@ -1,14 +1,17 @@
-// import Cookies from 'js-cookie'
 
 const app = {
   state: {
-    sidebar: {
-    },
-    device: ''
+    device: 'desktop'
   },
   mutations: {
+    TOGGLE_DEVICE: (state, device) => {
+      state.device = device
+    }
   },
   actions: {
+    ToggleDevice({ commit }, device) {
+      commit('TOGGLE_DEVICE', device)
+    }
   }
 }
 

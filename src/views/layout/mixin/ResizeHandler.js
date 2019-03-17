@@ -6,11 +6,6 @@ const RATIO = 3
 
 export default {
   watch: {
-    $route(route) {
-      if (this.device === 'mobile' && this.sidebar.opened) {
-        store.dispatch('CloseSideBar', { withoutAnimation: false })
-      }
-    }
   },
   beforeMount() {
     window.addEventListener('resize', this.resizeHandler)
@@ -19,7 +14,7 @@ export default {
     const isMobile = this.isMobile()
     if (isMobile) {
       store.dispatch('ToggleDevice', 'mobile')
-      store.dispatch('CloseSideBar', { withoutAnimation: true })
+      // store.dispatch('CloseSideBar', { withoutAnimation: true })
     }
   },
   methods: {
@@ -30,10 +25,11 @@ export default {
     resizeHandler() {
       if (!document.hidden) {
         const isMobile = this.isMobile()
+        console.log('isMobile', isMobile)
         store.dispatch('ToggleDevice', isMobile ? 'mobile' : 'desktop')
 
         if (isMobile) {
-          store.dispatch('CloseSideBar', { withoutAnimation: true })
+          // store.dispatch('CloseSideBar', { withoutAnimation: true })
         }
       }
     }

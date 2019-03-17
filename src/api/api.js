@@ -1,15 +1,7 @@
 import request from '@/utils/request'
 
-export function login(userName, pwd) {
-  return request({
-    url: '/report-bi/Authorization/login',
-    method: 'post',
-    data: {
-      userName,
-      pwd
-    }
-  })
-}
+
+
 
 // 上传
 export function uploadExcel(type, file) {
@@ -36,6 +28,14 @@ export function downLoad(query) {
 export function getMenus() {
   return request({
     url: '/report-bi/report/menus',
+    method: 'get'
+  })
+}
+
+// 基本资料
+export function getInfo() {
+  return request({
+    url: '/mengtan/info',
     method: 'get'
   })
 }

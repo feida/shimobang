@@ -1,5 +1,9 @@
 <template>
   <div class="dashboard-container">
+    <div class="menuTitle">
+      <span class="menuTitle_icon"></span>
+      <span>价格趋势</span>
+    </div>
     <el-tabs type="card" class="tabs" @tab-click="handleClick" >
       <el-tab-pane v-for=" (item,index) in tabChartsData" :label="item.title" :key="index">
         <div class="chart-container">
@@ -11,10 +15,11 @@
       广告
     </div>
     <div class="menuTitle">
+      <span class="menuTitle_icon"></span>
       <span>在线采购</span>
     </div>
-    <el-collapse @change="handleChange">
-      <el-collapse-item v-for=" (item,index) in shopListData" :title="item.shop_category" :key="'shop_category'+ index">
+    <el-collapse @change="handleChange" v-model="activeNames">
+      <el-collapse-item v-for=" (item,index) in shopListData" :title="item.shop_category" :key="'shop_category'+ index" :name="index + 1">
         <div v-for=" (m,n) in item.data_list" :key="'data_list' + n" class="list">
           <span class="shop_name">{{ m.shop_name }}</span>
           <div>
@@ -29,13 +34,17 @@
       广告
     </div>
     <div class="menuTitle">
+      <span class="menuTitle_icon"></span>
       <span>新闻资讯</span>
     </div>
     <div style="background-color: #f9f9f9; padding-bottom: 15px">
       <el-row :gutter="20">
         <el-col :xs="24" :sm="24" :md="12" :lg="12" :xl="12" v-for="(item, index) in newsListData" :key="index">
           <div class="grid-content bg-purple">
-            <h4> {{item.news_category}} </h4>
+            <div>
+              <h4 style="display:inline-block;">  {{item.news_category}} </h4>
+              <span style="float: right; line-height: 60px;">更多>></span>
+            </div>
             <div class="news_wrap" v-for=" ( m, n ) in item.data_list" :key="'list' + n">
               <span class="newsTitle">{{m.news_title}}</span>
               <span class="newsDate">{{m.news_date}}</span>
@@ -56,8 +65,7 @@ export default {
   components: { Chart },
   data() {
     return {
-      activeName2: 'first',
-      activeNames: ['1'],
+      activeNames: 1,
       tabChartsData: [],
       shopListData: [],
       newsListData: [],
@@ -65,10 +73,11 @@ export default {
   },
   computed: {
     ...mapGetters([
-      'name'
+      'info'
     ])
   },
   created() {
+    this.$store.dispatch('GetInfo')
     this.getTabchartsList()
     this.getShopListData()
     this.getNewsListData()
@@ -101,6 +110,7 @@ export default {
     },
 
     talkaaaaa() {
+      console.log('info55555',this.info)
       this.$message({
         message: '您的议价请求已发送给工作人员，工作人员将尽快与您联系！',
         type: 'success',
@@ -142,6 +152,14 @@ export default {
     line-height: 40px;
     font-size: 18px;
   }
+  .menuTitle_icon {
+    display: inline-block;
+    width: 8px;
+    height: 20px;
+    vertical-align: sub;
+    background: #000;
+    margin-right: 5px;
+  }
   .list {
     position: relative;
     border: 1px solid #99a9bf;
@@ -169,10 +187,11 @@ export default {
     //background: #d3dce6;
   }
   .grid-content {
-    border-radius: 4px;
     //min-height: 36px;
     width: 90%;
     margin: 0 auto;
+    padding-bottom: 5px;
+    border-bottom: 1px dashed #999;
   }
 
   .news_wrap {
