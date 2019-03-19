@@ -17,7 +17,7 @@ export default {
 <style scoped>
 .app-main {
   /*50 = navbar  */
-  min-height: calc(100vh - 60px - 90px);
+  /*min-height: calc(100vh - 60px - 90px);*/
   position: relative;
   overflow: hidden;
 }

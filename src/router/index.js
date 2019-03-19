@@ -36,14 +36,14 @@ export const constantRouterMap = [
     }]
   },
   {
-    path: '/form',
+    path: '/newsMore',
     component: Layout,
     children: [
       {
         path: 'index',
-        name: 'Form',
-        component: () => import('@/views/form/index'),
-        meta: { title: 'Form', icon: 'form' }
+        name: 'newsMore',
+        component: () => import('@/views/newsMore/index'),
+        // meta: { title: 'newsMore', icon: 'newsMore' }
       }
     ]
   },

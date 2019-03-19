@@ -63,3 +63,39 @@ export function getNewsList() {
     method: 'get'
   })
 }
+
+// 新闻类别
+export function getNews_category() {
+  return request({
+    url: '/mengtan/news_category',
+    method: 'get'
+  })
+}
+
+// 更多新闻列表
+export function all_news_list(query) {
+  return request({
+    url: '/mengtan/all_news_list',
+    method: 'get',
+    params: query
+  })
+}
+
+
+// 议价
+export function bargaining(data) {
+  return request({
+    url: '/mengtan/bargaining',
+    method: 'post',
+    data: data
+  })
+}
+
+// 采购
+export function buy(data) {
+  return request({
+    url: '/mengtan/buy',
+    method: 'post',
+    data: data
+  })
+}

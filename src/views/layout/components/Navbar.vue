@@ -30,7 +30,7 @@
   },
   methods: {
     push() {
-      //this.$router.push('/login')
+      this.$router.push('/newsMore/index')
       //console.log('info22',this.info)
     }
   }
@@ -42,7 +42,7 @@
   //background-color: #304156;
   //margin: 20px 0;
   //height: 60px;
-  line-height: 60px;
+  //line-height: 60px;
   border-radius: 0px !important;
   border-bottom: 1px solid #E4E7ED;
   .avatar-container {

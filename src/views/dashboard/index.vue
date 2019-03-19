@@ -11,8 +11,19 @@
         </div>
       </el-tab-pane>
     </el-tabs>
-    <div style="height: 50px;margin: 15px 0; border: 1px solid #eee; text-align: center; line-height: 50px">
-      广告
+    <div style="margin: 15px 0;">
+      <el-row :gutter="10">
+        <el-col :xs="24" :sm="24" :md="12" :lg="12" :xl="12">
+          <a :href="info.AD_data[0].link" target="_blank">
+            <img :src="info.AD_data[0].img_url" style="width: 100%; height: 80px;" alt="">
+          </a>
+        </el-col>
+        <el-col :xs="24" :sm="24" :md="12" :lg="12" :xl="12">
+          <a :href="info.AD_data[1].link" target="_blank">
+            <img :src="info.AD_data[1].img_url" style="width: 100%; height: 80px;" alt="">
+          </a>
+        </el-col>
+      </el-row>
     </div>
     <div class="menuTitle">
       <span class="menuTitle_icon"></span>
@@ -23,15 +34,26 @@
         <div v-for=" (m,n) in item.data_list" :key="'data_list' + n" class="list">
           <span class="shop_name">{{ m.shop_name }}</span>
           <div>
-            <el-button round size="mini" @click="talkaaaaa()">议价</el-button>
-            <el-button round size="mini">立即采购</el-button>
+            <el-button round type="primary" size="mini" @click="talkPrice(m)">议价</el-button>
+            <el-button round type="danger" size="mini" @click="buy_goods(m)">立即采购</el-button>
           </div>
         </div>
       </el-collapse-item>
     </el-collapse>
 
-    <div style="height: 50px; margin: 15px 0;border: 1px solid #eee;text-align: center; line-height: 50px">
-      广告
+    <div style="margin: 15px 0;">
+      <el-row :gutter="10">
+        <el-col :xs="24" :sm="24" :md="12" :lg="12" :xl="12">
+          <a :href="info.AD_data[2].link" target="_blank">
+            <img :src="info.AD_data[2].img_url" style="width: 100%; height: 80px;" alt="">
+          </a>
+        </el-col>
+        <el-col :xs="24" :sm="24" :md="12" :lg="12" :xl="12">
+          <a :href="info.AD_data[3].link" target="_blank">
+            <img :src="info.AD_data[3].img_url" style="width: 100%; height: 80px;" alt="">
+          </a>
+        </el-col>
+      </el-row>
     </div>
     <div class="menuTitle">
       <span class="menuTitle_icon"></span>
@@ -43,7 +65,7 @@
           <div class="grid-content bg-purple">
             <div>
               <h4 style="display:inline-block;">  {{item.news_category}} </h4>
-              <span style="float: right; line-height: 60px;">更多>></span>
+              <span style="float: right; line-height: 60px; color: #3a8ee6;" @click="pushMore">更多>></span>
             </div>
             <div class="news_wrap" v-for=" ( m, n ) in item.data_list" :key="'list' + n">
               <span class="newsTitle">{{m.news_title}}</span>
@@ -53,11 +75,65 @@
         </el-col>
       </el-row>
     </div>
+
+    <el-dialog title="议价" :visible.sync="dialogFormVisible" width="80%">
+      <el-form :model="talkPriceData" :rules="rules" ref="talkPrice" label-width="100px" class="demo-ruleForm">
+        <el-form-item label="意向价格" prop="price">
+          <el-input v-model="talkPriceData.price"></el-input>
+        </el-form-item>
+        <el-form-item label="数量" prop="count">
+          <el-input v-model="talkPriceData.count"></el-input>
+        </el-form-item>
+      </el-form>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="cancelTalk">取 消</el-button>
+        <el-button type="primary" @click="commitTalk('talkPrice')">确 定</el-button>
+      </div>
+    </el-dialog>
+
+
+    <el-dialog title="立即采购" :visible.sync="dialogFormVisible1" width="80%">
+      <el-form :model="buyData" :rules="rules" ref="buy"  label-width="100px" class="demo-ruleForm">
+        <el-form-item label="产品名">
+          <span>{{buyData.goods_name}}</span>
+        </el-form-item>
+        <el-form-item label="单价">
+          <span>{{buyData.price}}</span>
+        </el-form-item>
+        <el-form-item label="采购量" prop="total_num">
+          <el-input v-model="buyData.total_num" @change="keydown()"></el-input>
+        </el-form-item>
+        <el-form-item label="总价" >
+          <span style="font-size: 18px; color: red;">{{buyData.total_price}}</span>
+        </el-form-item>
+        <el-form-item label="收货地址" prop="reciving_address">
+          <el-input v-model="buyData.reciving_address"></el-input>
+        </el-form-item>
+        <el-form-item label="物流方式">
+          <el-radio-group v-model="buyData.logistics_mode">
+            <el-radio :label="0">到付</el-radio>
+            <el-radio :abel="1">寄付</el-radio>
+          </el-radio-group>
+        </el-form-item>
+        <el-form-item label="备注">
+          <el-input
+            type="textarea"
+            :rows="2"
+            placeholder="请输入内容"
+            v-model="buyData.remark">
+          </el-input>
+        </el-form-item>
+      </el-form>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="cancelBuy">取 消</el-button>
+        <el-button type="primary" @click="commitBuy('buy')">确 定</el-button>
+      </div>
+    </el-dialog>
   </div>
 </template>
 
 <script>
-import { getTabcharts, getShopList, getNewsList } from '@/api/api'
+import { getTabcharts, getShopList, getNewsList, bargaining, buy } from '@/api/api'
 import Chart from '@/components/Charts/lineMarker'
 import { mapGetters } from 'vuex'
 export default {
@@ -65,10 +141,47 @@ export default {
   components: { Chart },
   data() {
     return {
+      dialogFormVisible: false,
+      dialogFormVisible1: false,
+      talkPriceData:{
+        price: '',
+        count: '',
+        shop_id: '',
+        customer_id: ''
+      },
+      buyData:{
+        customer_id: '',
+        goods_id: '',
+        goods_name: '',
+        price: '',
+        total_price: 0,
+        total_num: '',
+        reciving_address: '',
+        logistics_mode: 0,
+        remark:''
+
+      },
       activeNames: 1,
       tabChartsData: [],
       shopListData: [],
       newsListData: [],
+      rules: {
+        price: [
+          { required: true, message: '请输入意向价格', trigger: 'blur' },
+          { pattern: /([1-9]\d*(\.\d*[1-9])?)|(0\.\d*[1-9])/, message: '只能输入大于0的数字', trigger: 'blur' }
+        ],
+        count: [
+          { required: true, message: '请输入数量', trigger: 'change' },
+          { pattern: /([1-9]\d*(\.\d*[1-9])?)|(0\.\d*[1-9])/, message: '只能输入大于0的数字', trigger: 'blur' }
+        ],
+        total_num: [
+          { required: true, message: '请输入数量', trigger: 'change' },
+          { pattern: /([1-9]\d*(\.\d*[1-9])?)|(0\.\d*[1-9])/, message: '只能输入大于0的数字', trigger: 'blur' }
+        ],
+        reciving_address: [
+          { required: true, message: '请输入地址', trigger: 'change' },
+        ]
+      }
     }
   },
   computed: {
@@ -109,16 +222,112 @@ export default {
       })
     },
 
-    talkaaaaa() {
-      console.log('info55555',this.info)
-      this.$message({
-        message: '您的议价请求已发送给工作人员，工作人员将尽快与您联系！',
-        type: 'success',
+    // 议价
+    talkPrice(m) {
+      this.dialogFormVisible = true
+      this.talkPriceData.customer_id = ''
+      this.talkPriceData.shop_id = m.shop_id
+
+    },
+    commitTalk(talkPrice) {
+      this.$refs[talkPrice].validate((valid) => {
+        if (valid) {
+          /*bargaining(this.talkPriceData).then(response => {
+            console.log('bargaining', response)
+            this.$message({
+              message: '您的议价请求已发送给工作人员，工作人员将尽快与您联系！',
+              type: 'success',
+            });
+            this.dialogFormVisible = false;
+          }).catch(err => {
+            this.$message.error('议价失败');
+            this.dialogFormVisible = false;
+          })*/
+          this.$message({
+            message: '您的议价请求已发送给工作人员，工作人员将尽快与您联系！',
+            type: 'success',
+          });
+          this.dialogFormVisible = false;
+        } else {
+          return false;
+        }
+      });
+
+    },
+    cancelTalk() {
+      this.dialogFormVisible = false;
+      this.restTalkPriceData()
+    },
+
+    restTalkPriceData() {
+      this.talkPriceData = {
+        price: '',
+        count: '',
+        shop_id: '',
+        customer_id:''
+      }
+    },
+
+
+    //采购
+    buy_goods(m) {
+      this.buyData.customer_id = ''
+      this.buyData.goods_id = m.shop_id
+      this.buyData.goods_name = m.shop_name
+      this.buyData.price = m.price
+      this.dialogFormVisible1 = true
+
+    },
+    cancelBuy() {
+      this.dialogFormVisible1 = false;
+      this.restBuyData()
+    },
+    commitBuy(buy) {
+      this.$refs[buy].validate((valid) => {
+        if (valid) {
+          /*buy(this.buyData).then(response => {
+            console.log('buyData', response)
+            this.$message({
+              message: '您的采购请求已发送给工作人员，工作人员将尽快与您联系！',
+              type: 'success',
+            });
+            this.dialogFormVisible1 = false;
+          }).catch(err => {
+            this.$message.error('采购失败');
+            this.dialogFormVisible1 = false;
+          })*/
+          this.$message({
+            message: '您的采购请求已发送给工作人员，工作人员将尽快与您联系！',
+            type: 'success',
+          });
+          this.dialogFormVisible1 = false;
+        } else {
+          return false;
+        }
       });
     },
+
+    restBuyData() {
+      this.buyData = {
+        customer_id: '',
+        goods_id: '',
+        goods_name: '',
+        price: '',
+        total_price: 0,
+        total_num: '',
+        reciving_address: '',
+        logistics_mode: 0,
+        remark:''
+      }
+    },
+    keydown() {
+      this.buyData.total_price =  Math.floor(this.buyData.total_num * this.buyData.price * 100) / 100
+    },
+    pushMore() {
+      this.$router.push('/newsMore/index')
+    },
+
     handleClick(tab, event) {
-      // console.log(tab.index)
-      // console.log(this.$refs['charts' + tab.index][0])
       this.$refs['charts' + tab.index][0].__resizeHanlder()
     },
     handleChange(val) {

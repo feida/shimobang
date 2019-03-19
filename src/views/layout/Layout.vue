@@ -2,15 +2,36 @@
   <div class="app-wrapper" >
     <navbar/>
     <div style=" padding-top: 30px;">
-      <img :src="info.bg_url" style="width: 100%;" alt="">
+      <img id="img" :src="info.bg_url"  style="width: 100%; height: 300px" alt="">
       <!--<img src="../../assets/images/background.jpg" style="width: 100%;" alt="">-->
     </div>
     <div class="main-container">
       <app-main/>
     </div>
     <div class="footer">
-      <p>盟碳（上海国际贸易有限公司）</p>
-      <p>地址：上海市浦东新区东方路 联系电话：400-0000-0000</p>
+      <el-row :gutter="20">
+        <el-col :xs="24" :sm="24" :md="12" :lg="12" :xl="12" >
+          <div style="margin: 0 auto;">
+            <p style="font-size: 24px;">联系方式:</p>
+            <p style="font-size: 28px; color: red">{{info.telphone}}</p>
+          </div>
+        </el-col>
+        <el-col :xs="24" :sm="24" :md="12" :lg="12" :xl="12" >
+          <div>
+            <div style="width: 150px; margin: 0 auto; margin-top: 30px;">
+              <img :src="info.qrcode_url"  style="width: 120px; height: 120px;" alt="">
+              <p>扫码二维码，关注我们</p>
+            </div>
+
+          </div>
+        </el-col>
+      </el-row>
+      <div class="footer_bottom">
+        <div style="text-align: center">
+          <p>盟碳（上海国际贸易有限公司）</p>
+          <p>地址：上海市浦东新区东方路  <span style="margin-left: 20px;">邮箱：{{info.email}}</span></p>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -19,6 +40,7 @@
 import { Navbar, AppMain, Sidebar } from './components'
 import { mapGetters } from 'vuex'
 import ResizeMixin from './mixin/ResizeHandler'
+import { debounce } from '@/utils'
 export default {
   name: 'Layout',
   components: {
@@ -35,12 +57,18 @@ export default {
     device() {
       return this.$store.state.app.device
     },
+
   },
   created() {
     // this.init()
     // console.log('device3333',this.device,this.info)
   },
   methods: {
+
+  },
+  mounted() {
+  },
+  watch: {
 
   }
 }
@@ -77,10 +105,17 @@ export default {
 
   }
   .footer {
-    //height: 100px;
+    min-height: 200px;
     text-align: center;
     font-size: 14px;
+    color: #fff;
     padding-bottom: 15px;
     background-color: #141414;
+    position: relative;
+  }
+  .footer_bottom {
+    width: 100%;
+    /*position: absolute;*/
+    /*bottom: 10px;*/
   }
 </style>
