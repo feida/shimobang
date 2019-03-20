@@ -37,15 +37,14 @@
 </template>
 
 <script>
-import { Navbar, AppMain, Sidebar } from './components'
+import { Navbar, AppMain } from './components'
 import { mapGetters } from 'vuex'
 import ResizeMixin from './mixin/ResizeHandler'
 export default {
   name: 'Layout',
   components: {
     Navbar,
-    AppMain,
-    Sidebar
+    AppMain
   },
   mixins: [ResizeMixin],
   computed: {

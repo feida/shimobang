@@ -36,7 +36,7 @@
               <div v-for="item in newsList" :key="item.news_id" class="itemWrap" @click="pushDetail(item.news_id)">
                 <el-row :gutter="20">
                   <el-col :span="5">
-                    <div class="new_title">
+                    <div :class="device !='mobile' && 'new_title'">
                       <span>{{ item.news_date }}</span>
                     </div>
                   </el-col>
@@ -46,7 +46,7 @@
                     </div>
                   </el-col>
                   <el-col :span="4">
-                    <div class="new_title">
+                    <div :class="device !='mobile' && 'new_title'">
                       <span style="color: #3a8ee6;">阅读全文</span>
                     </div>
                   </el-col>
