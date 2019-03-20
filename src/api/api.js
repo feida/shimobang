@@ -1,34 +1,5 @@
 import request from '@/utils/request'
 
-// 上传
-export function uploadExcel(type, file) {
-  return request({
-    url: '/report-bi/file/uploadExcel',
-    method: 'post',
-    data: {
-      type,
-      file
-    }
-  })
-}
-
-// 下载模板
-export function downLoad(query) {
-  return request({
-    url: '/report-bi/file/getTemplateUrlByType',
-    method: 'get',
-    params: query
-  })
-}
-
-// menu
-export function getMenus() {
-  return request({
-    url: '/report-bi/report/menus',
-    method: 'get'
-  })
-}
-
 // 基本资料
 export function getInfo() {
   return request({

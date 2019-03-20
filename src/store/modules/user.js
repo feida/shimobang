@@ -22,10 +22,8 @@ const user = {
     SET_INFO: (state, info) => {
       console.log('set', info)
       state.info = info
-    },
-    SET_MENUDATAITEM: (state, menuDataItem) => {
-      state.menuDataItem = menuDataItem
     }
+
   },
 
   actions: {
