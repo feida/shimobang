@@ -1,7 +1,8 @@
 <template>
   <div class="dashboard-container">
+    <div style="width: 400px; height: 400px; background: red; position: absolute; top: -400px; left: 0; z-index: 100"/>
     <div class="menuTitle">
-      <span class="menuTitle_icon"></span>
+      <span class="menuTitle_icon"/>
       <span>价格趋势</span>
     </div>
     <el-tabs type="card" class="tabs" @tab-click="handleClick" >
@@ -26,11 +27,11 @@
       </el-row>
     </div>
     <div class="menuTitle">
-      <span class="menuTitle_icon"></span>
+      <span class="menuTitle_icon"/>
       <span>在线采购</span>
     </div>
-    <el-collapse @change="handleChange" v-model="activeNames">
-      <el-collapse-item v-for=" (item,index) in shopListData" :title="item.shop_category" :key="'shop_category'+ index" :name="index + 1">
+    <el-collapse v-model="activeNames" accordion @change="handleChange">
+      <el-collapse-item v-for=" (item,index) in tempShopData" :title="item.shop_category" :key="'shop_category'+ index" :name="index + 1">
         <div v-for=" (m,n) in item.data_list" :key="'data_list' + n" class="list">
           <span class="shop_name">{{ m.shop_name }}</span>
           <div>
@@ -40,6 +41,9 @@
         </div>
       </el-collapse-item>
     </el-collapse>
+    <div v-if="shopListData.length > 4 && show" class="more" @click="getMore">
+      <span>更多<i class="el-icon-arrow-down"/></span>
+    </div>
 
     <div style="margin: 15px 0;">
       <el-row :gutter="10">
@@ -56,33 +60,33 @@
       </el-row>
     </div>
     <div class="menuTitle">
-      <span class="menuTitle_icon"></span>
+      <span class="menuTitle_icon"/>
       <span>新闻资讯</span>
     </div>
     <div style="background-color: #f9f9f9; padding-bottom: 15px">
       <el-row :gutter="20">
-        <el-col :xs="24" :sm="24" :md="12" :lg="12" :xl="12" v-for="(item, index) in newsListData" :key="index">
+        <el-col v-for="(item, index) in newsListData" :xs="24" :sm="24" :md="12" :lg="12" :xl="12" :key="index">
           <div class="grid-content bg-purple">
             <div>
-              <h4 style="display:inline-block;">  {{item.news_category}} </h4>
+              <h4 style="display:inline-block;">  {{ item.news_category }} </h4>
               <span style="float: right; line-height: 60px; color: #3a8ee6;" @click="pushMore">更多>></span>
             </div>
-            <div class="news_wrap" v-for=" ( m, n ) in item.data_list" :key="'list' + n">
-              <span class="newsTitle">{{m.news_title}}</span>
-              <span class="newsDate">{{m.news_date}}</span>
+            <div v-for=" ( m, n ) in item.data_list" :key="'list' + n" class="news_wrap" @click="pushDetail(m.news_id)">
+              <span class="newsTitle">{{ m.news_title }}</span>
+              <span class="newsDate">{{ m.news_date }}</span>
             </div>
           </div>
         </el-col>
       </el-row>
     </div>
 
-    <el-dialog title="议价" :visible.sync="dialogFormVisible" width="80%">
-      <el-form :model="talkPriceData" :rules="rules" ref="talkPrice" label-width="100px" class="demo-ruleForm">
+    <el-dialog :visible.sync="dialogFormVisible" title="议价" width="80%">
+      <el-form ref="talkPrice" :model="talkPriceData" :rules="rules" label-width="100px" class="demo-ruleForm">
         <el-form-item label="意向价格" prop="price">
-          <el-input v-model="talkPriceData.price"></el-input>
+          <el-input v-model="talkPriceData.price"/>
         </el-form-item>
         <el-form-item label="数量" prop="count">
-          <el-input v-model="talkPriceData.count"></el-input>
+          <el-input v-model="talkPriceData.count"/>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -91,23 +95,22 @@
       </div>
     </el-dialog>
 
-
-    <el-dialog title="立即采购" :visible.sync="dialogFormVisible1" width="80%">
-      <el-form :model="buyData" :rules="rules" ref="buy"  label-width="100px" class="demo-ruleForm">
+    <el-dialog :visible.sync="dialogFormVisible1" title="立即采购" width="80%">
+      <el-form ref="buy" :model="buyData" :rules="rules" label-width="100px" class="demo-ruleForm">
         <el-form-item label="产品名">
-          <span>{{buyData.goods_name}}</span>
+          <span>{{ buyData.goods_name }}</span>
         </el-form-item>
         <el-form-item label="单价">
-          <span>{{buyData.price}}</span>
+          <span>{{ buyData.price }}</span>
         </el-form-item>
         <el-form-item label="采购量" prop="total_num">
-          <el-input v-model="buyData.total_num" @change="keydown()"></el-input>
+          <el-input v-model="buyData.total_num" @change="keydown()"/>
         </el-form-item>
         <el-form-item label="总价" >
-          <span style="font-size: 18px; color: red;">{{buyData.total_price}}</span>
+          <span style="font-size: 18px; color: red;">{{ buyData.total_price }}</span>
         </el-form-item>
         <el-form-item label="收货地址" prop="reciving_address">
-          <el-input v-model="buyData.reciving_address"></el-input>
+          <el-input v-model="buyData.reciving_address"/>
         </el-form-item>
         <el-form-item label="物流方式">
           <el-radio-group v-model="buyData.logistics_mode">
@@ -117,11 +120,10 @@
         </el-form-item>
         <el-form-item label="备注">
           <el-input
-            type="textarea"
             :rows="2"
-            placeholder="请输入内容"
-            v-model="buyData.remark">
-          </el-input>
+            v-model="buyData.remark"
+            type="textarea"
+            placeholder="请输入内容"/>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -141,15 +143,16 @@ export default {
   components: { Chart },
   data() {
     return {
+      show: true,
       dialogFormVisible: false,
       dialogFormVisible1: false,
-      talkPriceData:{
+      talkPriceData: {
         price: '',
         count: '',
         shop_id: '',
         customer_id: ''
       },
-      buyData:{
+      buyData: {
         customer_id: '',
         goods_id: '',
         goods_name: '',
@@ -158,12 +161,13 @@ export default {
         total_num: '',
         reciving_address: '',
         logistics_mode: 0,
-        remark:''
+        remark: ''
 
       },
       activeNames: 1,
       tabChartsData: [],
       shopListData: [],
+      tempShopData: [],
       newsListData: [],
       rules: {
         price: [
@@ -179,7 +183,7 @@ export default {
           { pattern: /([1-9]\d*(\.\d*[1-9])?)|(0\.\d*[1-9])/, message: '只能输入大于0的数字', trigger: 'blur' }
         ],
         reciving_address: [
-          { required: true, message: '请输入地址', trigger: 'change' },
+          { required: true, message: '请输入地址', trigger: 'change' }
         ]
       }
     }
@@ -209,6 +213,7 @@ export default {
         console.log('getShopList', response)
         if (response.data) {
           this.shopListData = response.data
+          this.tempShopData = response.data.slice(0, 4)
         }
       })
     },
@@ -227,12 +232,11 @@ export default {
       this.dialogFormVisible = true
       this.talkPriceData.customer_id = ''
       this.talkPriceData.shop_id = m.shop_id
-
     },
     commitTalk(talkPrice) {
       this.$refs[talkPrice].validate((valid) => {
         if (valid) {
-          /*bargaining(this.talkPriceData).then(response => {
+          /* bargaining(this.talkPriceData).then(response => {
             console.log('bargaining', response)
             this.$message({
               message: '您的议价请求已发送给工作人员，工作人员将尽快与您联系！',
@@ -245,17 +249,16 @@ export default {
           })*/
           this.$message({
             message: '您的议价请求已发送给工作人员，工作人员将尽快与您联系！',
-            type: 'success',
-          });
-          this.dialogFormVisible = false;
+            type: 'success'
+          })
+          this.dialogFormVisible = false
         } else {
-          return false;
+          return false
         }
-      });
-
+      })
     },
     cancelTalk() {
-      this.dialogFormVisible = false;
+      this.dialogFormVisible = false
       this.restTalkPriceData()
     },
 
@@ -264,28 +267,26 @@ export default {
         price: '',
         count: '',
         shop_id: '',
-        customer_id:''
+        customer_id: ''
       }
     },
 
-
-    //采购
+    // 采购
     buy_goods(m) {
       this.buyData.customer_id = ''
       this.buyData.goods_id = m.shop_id
       this.buyData.goods_name = m.shop_name
       this.buyData.price = m.price
       this.dialogFormVisible1 = true
-
     },
     cancelBuy() {
-      this.dialogFormVisible1 = false;
+      this.dialogFormVisible1 = false
       this.restBuyData()
     },
     commitBuy(buy) {
       this.$refs[buy].validate((valid) => {
         if (valid) {
-          /*buy(this.buyData).then(response => {
+          /* buy(this.buyData).then(response => {
             console.log('buyData', response)
             this.$message({
               message: '您的采购请求已发送给工作人员，工作人员将尽快与您联系！',
@@ -298,13 +299,13 @@ export default {
           })*/
           this.$message({
             message: '您的采购请求已发送给工作人员，工作人员将尽快与您联系！',
-            type: 'success',
-          });
-          this.dialogFormVisible1 = false;
+            type: 'success'
+          })
+          this.dialogFormVisible1 = false
         } else {
-          return false;
+          return false
         }
-      });
+      })
     },
 
     restBuyData() {
@@ -317,14 +318,27 @@ export default {
         total_num: '',
         reciving_address: '',
         logistics_mode: 0,
-        remark:''
+        remark: ''
       }
     },
     keydown() {
-      this.buyData.total_price =  Math.floor(this.buyData.total_num * this.buyData.price * 100) / 100
+      this.buyData.total_price = Math.floor(this.buyData.total_num * this.buyData.price * 100) / 100
     },
+
+    // 更多产品
+    getMore() {
+      this.show = false
+      this.tempShopData = this.shopListData
+    },
+
+    // 更多新闻
     pushMore() {
       this.$router.push('/newsMore/index')
+    },
+
+    // 新闻详情
+    pushDetail(id) {
+      this.$router.push('/newsDetail/index/' + id)
     },
 
     handleClick(tab, event) {
@@ -419,6 +433,15 @@ export default {
     right: 0;
     top: 50%;
     margin-top: -15px;
+  }
+
+  .more {
+    text-align: center;
+    font-size: 14px;
+    height: 30px;
+    line-height: 30px;
+    color: #909399;
+    background: #F2F6FC;
   }
 
   @media only screen and (max-width: 600px) {

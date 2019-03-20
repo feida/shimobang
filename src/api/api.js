@@ -1,8 +1,5 @@
 import request from '@/utils/request'
 
-
-
-
 // 上传
 export function uploadExcel(type, file) {
   return request({
@@ -80,7 +77,22 @@ export function all_news_list(query) {
     params: query
   })
 }
+// 更多新闻列表
+export function newsDetail(query) {
+  return request({
+    url: '/mengtan/news_detail',
+    method: 'get',
+    params: query
+  })
+}
 
+// 热门产品
+export function hotProduct() {
+  return request({
+    url: '/mengtan/hot_product',
+    method: 'get'
+  })
+}
 
 // 议价
 export function bargaining(data) {

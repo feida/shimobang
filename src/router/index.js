@@ -42,8 +42,18 @@ export const constantRouterMap = [
       {
         path: 'index',
         name: 'newsMore',
-        component: () => import('@/views/newsMore/index'),
-        // meta: { title: 'newsMore', icon: 'newsMore' }
+        component: () => import('@/views/newsMore/index')
+      }
+    ]
+  },
+  {
+    path: '/newsDetail',
+    component: Layout,
+    children: [
+      {
+        path: 'index/:news_id',
+        name: 'newsDetail',
+        component: () => import('@/views/newsDetail/index')
       }
     ]
   },
