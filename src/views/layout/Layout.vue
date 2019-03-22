@@ -1,8 +1,8 @@
 <template>
   <div class="app-wrapper" >
     <navbar/>
-    <div style="width: 100%; height: 360px; background: #eee; " :style="device == 'mobile' && {'height': '220px'}">
-      <img id="img" :src="info.bg_url"  style="width: 100%; height: 360px" :style="device == 'mobile' && {'height': '220px'}" alt="banner">
+    <div :style="device == 'mobile' && {'height': '220px'}" style="width: 100%; height: 360px; background: #eee; ">
+      <img id="img" :src="info.bg_url" :style="device == 'mobile' && {'height': '220px'}" style="width: 100%; height: 360px" alt="banner">
       <!--<img id="img" src="../../assets/images/background.jpg" :style="device == 'mobile' && {'height': '220px'}" style="width: 100%; height: 360px" alt="">-->
     </div>
     <div class="main-container">

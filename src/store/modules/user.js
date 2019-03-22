@@ -1,6 +1,5 @@
 import { getInfo, getUserInfo } from '@/api/api'
-import { getToken, removeToken, removeCookie } from '@/utils/auth'
-import { getQueryString } from '@/utils/index'
+import { getToken, removeToken } from '@/utils/auth'
 
 const user = {
   state: {
@@ -13,9 +12,9 @@ const user = {
       logo_url: '',
       qrcode_url: '',
       telphone: '',
-      AD_data: [],
+      AD_data: []
 
-    },
+    }
 
   },
 
@@ -41,7 +40,7 @@ const user = {
       return new Promise((resolve, reject) => {
         getInfo().then(response => {
           console.log('基本资料', response)
-          if (response.code == '0000') {
+          if (response.code === '0000') {
             commit('SET_INFO', response.data)
           }
           resolve()
@@ -55,7 +54,7 @@ const user = {
       return new Promise((resolve, reject) => {
         getUserInfo().then(response => {
           console.log('getUserInfo', response)
-          if (response.code == '0000' && response.data) {
+          if (response.code === '0000' && response.data) {
             // commit('SET_NAME', response.data.username)
             sessionStorage.setItem('userName', response.data.name)
             sessionStorage.setItem('customer_id', response.data.customer_id)

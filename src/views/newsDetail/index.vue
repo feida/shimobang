@@ -34,9 +34,7 @@
         <span>编辑：{{ newsDetailData['news_ author'] }}</span>
         <span style=" margin-left: 50px">{{ newsDetailData.news_date }}</span>
       </p>
-      <div v-html="newsDetailData['news_ content']">
-
-      </div>
+      <div v-html="newsDetailData['news_ content']"/>
     </div>
 
   </div>

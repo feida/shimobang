@@ -20,15 +20,15 @@
         <a v-if="info.AD_data[0]" :href="info.AD_data[0].link" target="_blank" class="ad_wrap">
           <img :src="info.AD_data[0].img_url" style="width: 100%; height: 80px;" alt="广告">
         </a>
-        <img  v-else="" src="../../assets/images/xuwei.jpg" style="width: 100%; height: 80px;" alt="">
+        <img v-else="" src="../../assets/images/xuwei.jpg" style="width: 100%; height: 80px;" alt="">
         <a v-if="info.AD_data[1]" :href="info.AD_data[1].link" target="_blank" class="ad_wrap">
           <img :src="info.AD_data[1].img_url" style="width: 100%; height: 80px;" alt="广告">
         </a>
-        <img  v-else="" src="../../assets/images/xuwei.jpg" style="width: 100%; height: 80px;" alt="">
+        <img v-else="" src="../../assets/images/xuwei.jpg" style="width: 100%; height: 80px;" alt="">
         <a v-if="info.AD_data[2]" :href="info.AD_data[2].link" target="_blank" class="ad_wrap">
           <img :src="info.AD_data[2].img_url" style="width: 100%; height: 80px;" alt="广告">
         </a>
-        <img  v-else="" src="../../assets/images/xuwei.jpg" style="width: 100%; height: 80px;" alt="">
+        <img v-else="" src="../../assets/images/xuwei.jpg" style="width: 100%; height: 80px;" alt="">
       </div>
     </div>
     <div :style="device !='mobile' && {'margin-left': '330px'}">

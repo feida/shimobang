@@ -18,13 +18,13 @@
           <a v-if="info.AD_data[0]" :href="info.AD_data[0].link" target="_blank" class="ad_wrap">
             <img :src="info.AD_data[0].img_url" style="width: 100%; height: 80px;" alt="广告">
           </a>
-          <img  v-else="" src="../../assets/images/xuwei.jpg" style="width: 100%; height: 80px;" alt="">
+          <img v-else="" src="../../assets/images/xuwei.jpg" style="width: 100%; height: 80px;" alt="">
         </el-col>
         <el-col :xs="24" :sm="24" :md="12" :lg="12" :xl="12" >
           <a v-if="info.AD_data[1]" :href="info.AD_data[1].link" target="_blank" class="ad_wrap">
             <img :src="info.AD_data[1].img_url" style="width: 100%; height: 80px;" alt="广告">
           </a>
-          <img  v-else="" src="../../assets/images/xuwei.jpg" style="width: 100%; height: 80px;" alt="">
+          <img v-else="" src="../../assets/images/xuwei.jpg" style="width: 100%; height: 80px;" alt="">
         </el-col>
       </el-row>
     </div>
@@ -53,13 +53,13 @@
           <a v-if="info.AD_data[2]" :href="info.AD_data[2].link" target="_blank" class="ad_wrap">
             <img :src="info.AD_data[2].img_url" style="width: 100%; height: 80px;" alt="广告">
           </a>
-          <img  v-else="" src="../../assets/images/xuwei.jpg" style="width: 100%; height: 80px;" alt="">
+          <img v-else="" src="../../assets/images/xuwei.jpg" style="width: 100%; height: 80px;" alt="">
         </el-col>
         <el-col :xs="24" :sm="24" :md="12" :lg="12" :xl="12">
           <a v-if="info.AD_data[3]" :href="info.AD_data[3].link" target="_blank" class="ad_wrap">
             <img :src="info.AD_data[3].img_url" style="width: 100%; height: 80px;" alt="广告">
           </a>
-          <img  v-else="" src="../../assets/images/xuwei.jpg" style="width: 100%; height: 80px;" alt="">
+          <img v-else="" src="../../assets/images/xuwei.jpg" style="width: 100%; height: 80px;" alt="">
         </el-col>
       </el-row>
     </div>
@@ -76,7 +76,7 @@
               <span style="float: right; line-height: 60px; color: #3a8ee6;" @click="pushMore">更多>></span>
             </div>
             <div v-for=" ( m, n ) in item.data_list" :key="'list' + n" class="news_wrap" @click="pushDetail(m.news_id)">
-              <span class="newsTitle">{{ m.news_title.length > 20 ? m.news_title.substring(0,20) + '...' : m.news_title}}</span>
+              <span class="newsTitle">{{ m.news_title.length > 20 ? m.news_title.substring(0,20) + '...' : m.news_title }}</span>
               <span class="newsDate">{{ m.news_date }}</span>
             </div>
           </div>
@@ -142,7 +142,6 @@
 import { getTabcharts, getShopList, getNewsList, bargaining, buyGoods, getUserInfo } from '@/api/api'
 import Chart from '@/components/Charts/lineMarker'
 import { mapGetters } from 'vuex'
-import { getQueryString } from '@/utils/index'
 export default {
   name: 'Dashboard',
   components: { Chart },
@@ -196,7 +195,7 @@ export default {
   },
   computed: {
     ...mapGetters([
-      'info',
+      'info'
     ])
   },
   created() {
@@ -237,41 +236,40 @@ export default {
     talkPrice(m) {
       // console.log('this.customer_id',this.customer_id)
       getUserInfo().then(res => {
-        if( res.code == '0000') {
+        if (res.code === '0000') {
           this.dialogFormVisible = true
           this.talkPriceData.customer_id = res.data.customer_id
           this.talkPriceData.shop_id = m.shop_id
-        } else if (res.code == '0002') {
-          this.$message.error(res.msg);
+        } else if (res.code === '0002') {
+          this.$message.error(res.msg)
 
           setTimeout(() => {
             this.pushLogin()
-          },1500)
+          }, 1500)
         }
       })
     },
     commitTalk(talkPrice) {
       this.$refs[talkPrice].validate((valid) => {
         if (valid) {
-           bargaining(this.talkPriceData).then(response => {
+          bargaining(this.talkPriceData).then(response => {
             console.log('bargaining', response)
-             if(response.code == '0000') {
-               this.$message({
-                 message: response.msg ? response.msg : '您的议价请求已发送给工作人员，工作人员将尽快与您联系！',
-                 type: 'success',
-               });
-               this.dialogFormVisible = false;
-             } else {
-               this.$message({
-                 message: response.msg ? response.msg : '议价失败',
-                 type: 'error',
-               });
-             }
-          }).catch(err => {
-            this.$message.error('议价失败');
-            this.dialogFormVisible = false;
+            if (response.code === '0000') {
+              this.$message({
+                message: response.msg ? response.msg : '您的议价请求已发送给工作人员，工作人员将尽快与您联系！',
+                type: 'success'
+              })
+              this.dialogFormVisible = false
+            } else {
+              this.$message({
+                message: response.msg ? response.msg : '议价失败',
+                type: 'error'
+              })
+            }
+          }).catch(() => {
+            this.$message.error('议价失败')
+            this.dialogFormVisible = false
           })
-
         } else {
           return false
         }
@@ -294,21 +292,20 @@ export default {
     // 采购
     buy_goods(m) {
       getUserInfo().then(res => {
-        if( res.code == '0000') {
+        if (res.code === '0000') {
           // this.buyData.customer_id = this.customer_id
           this.buyData.customer_id = res.data.customer_id
           this.buyData.goods_id = m.shop_id
           this.buyData.goods_name = m.shop_name
           this.buyData.price = m.price
           this.dialogFormVisible1 = true
-        } else if (res.code == '0002') {
-          this.$message.error(res.msg);
+        } else if (res.code === '0002') {
+          this.$message.error(res.msg)
           setTimeout(() => {
             this.pushLogin()
-          },1500)
+          }, 1500)
         }
       })
-
     },
     cancelBuy() {
       this.dialogFormVisible1 = false
@@ -319,22 +316,21 @@ export default {
         if (valid) {
           buyGoods(this.buyData).then(response => {
             console.log('buyData', response)
-            if(response.code == '0000') {
+            if (response.code === '0000') {
               this.$message({
                 message: response.msg ? response.msg : '您的采购请求已发送给工作人员，工作人员将尽快与您联系！',
-                type: 'success',
-              });
-              this.dialogFormVisible1 = false;
+                type: 'success'
+              })
+              this.dialogFormVisible1 = false
             } else {
               this.$message({
                 message: response.msg ? response.msg : '采购失败',
-                type: 'error',
-              });
+                type: 'error'
+              })
             }
-
-          }).catch(err => {
-            this.$message.error('采购失败');
-            this.dialogFormVisible1 = false;
+          }).catch(() => {
+            this.$message.error('采购失败')
+            this.dialogFormVisible1 = false
           })
         } else {
           return false
@@ -383,8 +379,8 @@ export default {
     },
 
     // 跳转登陆页
-    pushLogin (){
-      window.open(process.env.BASE_API + '/toLogin','_self')
+    pushLogin() {
+      window.open(process.env.BASE_API + '/toLogin', '_self')
     }
   }
 }

@@ -1,12 +1,12 @@
 <template>
   <div class="navbar" >
-    <span style=" display: inline-block;width: 180px;height: 80px; background: #eee;" @click="pushDashBoard">
+    <span style=" display: inline-block;width: 180px;height: 80px; " @click="pushDashBoard">
       <img :src="info.logo_url" style="width: 180px;height: 80px; " alt="LOGO">
       <!--<span style="display: inline-block; width: 180px; height: 80px; border: 1px solid #eee; text-align: center">LOGO</span>-->
     </span>
     <div class="avatar-container">
-      <span v-if="username" >欢迎用户:<span style="color:#3a8ee6">{{username}}</span></span>
-      <el-button  v-else type="text" style="padding: 0" @click="push()">登陆/注册</el-button>
+      <span v-if="username" >欢迎用户:<span style="color:#3a8ee6">{{ username }}</span></span>
+      <el-button v-else type="text" style="padding: 0" @click="push()">登陆/注册</el-button>
     </div>
 
   </div>
@@ -23,14 +23,14 @@ export default {
   computed: {
     ...mapGetters([
       'info',
-      'device',
+      'device'
     ])
   },
   created() {
   },
   methods: {
     push() {
-      window.open(process.env.BASE_API + '/toLogin','_self')
+      window.open(process.env.BASE_API + '/toLogin', '_self')
     },
     // 首页
     pushDashBoard() {
@@ -43,7 +43,8 @@ export default {
 <style rel="stylesheet/scss" lang="scss" scoped>
 .navbar {
   height: 80px;
-  background-color: #f6f6f6;
+  //background-color: #f6f6f6;
+  background-color: #404553;
   //margin: 20px 0;
   //height: 60px;
   //line-height: 60px;
