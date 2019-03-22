@@ -9,7 +9,7 @@
       <app-main/>
     </div>
     <div class="footer">
-      <el-row :gutter="20">
+      <el-row>
         <el-col :xs="24" :sm="24" :md="12" :lg="12" :xl="12" >
           <div style="margin: 0 auto;">
             <p style="font-size: 24px;">联系方式:</p>
