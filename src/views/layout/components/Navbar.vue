@@ -1,12 +1,12 @@
 <template>
   <div class="navbar" >
-    <span style="margin-left: 20px; " @click="pushDashBoard">
-      <img :src="info.logo_url" style="width: 165px;height: 60px; margin-top: 20px;" alt="">
-      <!--<span style="display: inline-block; width: 160px; height: 60px; border: 1px solid #eee; text-align: center">LOGO</span>-->
+    <span style=" display: inline-block;width: 180px;height: 80px; background: #eee;" @click="pushDashBoard">
+      <img :src="info.logo_url" style="width: 180px;height: 80px; " alt="LOGO">
+      <!--<span style="display: inline-block; width: 180px; height: 80px; border: 1px solid #eee; text-align: center">LOGO</span>-->
     </span>
     <div class="avatar-container">
-      <!--<el-button type="primary" round size="mini"><a href="http://www.baidu.com" target="_blank">登陆</a></el-button>-->
-      <el-button type="text" @click="push()">登陆/注册</el-button>
+      <span v-if="username" >欢迎用户:<span style="color:#3a8ee6">{{username}}</span></span>
+      <el-button  v-else type="text" style="padding: 0" @click="push()">登陆/注册</el-button>
     </div>
 
   </div>
@@ -17,21 +17,20 @@ import { mapGetters } from 'vuex'
 export default {
   data() {
     return {
+      username: sessionStorage.getItem('userName')
     }
   },
   computed: {
     ...mapGetters([
       'info',
-      'device'
+      'device',
     ])
   },
   created() {
-    console.log('info', this.info)
   },
   methods: {
     push() {
-      this.$router.push('/newsMore/index')
-      // console.log('info22',this.info)
+      window.open(process.env.BASE_API + '/toLogin','_self')
     },
     // 首页
     pushDashBoard() {
@@ -43,6 +42,7 @@ export default {
 
 <style rel="stylesheet/scss" lang="scss" scoped>
 .navbar {
+  height: 80px;
   background-color: #f6f6f6;
   //margin: 20px 0;
   //height: 60px;
@@ -50,11 +50,10 @@ export default {
   border-radius: 0px !important;
   border-bottom: 1px solid #E4E7ED;
   .avatar-container {
-    height: 60px;
     display: inline-block;
     position: absolute;
     right: 20px;
-    top: 20px;
+    top: 30px;
   }
 }
 </style>

@@ -17,15 +17,18 @@
         </div>
       </div>
       <div style="margin-top: 30px;">
-        <a :href="info.AD_data[0].link" target="_blank">
-          <img :src="info.AD_data[0].img_url" style="width: 100%; height: 80px;" alt="">
+        <a v-if="info.AD_data[0]" :href="info.AD_data[0].link" target="_blank" class="ad_wrap">
+          <img :src="info.AD_data[0].img_url" style="width: 100%; height: 80px;" alt="广告">
         </a>
-        <a :href="info.AD_data[1].link" target="_blank">
-          <img :src="info.AD_data[1].img_url" style="width: 100%; height: 80px;" alt="">
+        <img  v-else="" src="../../assets/images/xuwei.jpg" style="width: 100%; height: 80px;" alt="">
+        <a v-if="info.AD_data[1]" :href="info.AD_data[1].link" target="_blank" class="ad_wrap">
+          <img :src="info.AD_data[1].img_url" style="width: 100%; height: 80px;" alt="广告">
         </a>
-        <a :href="info.AD_data[2].link" target="_blank">
-          <img :src="info.AD_data[2].img_url" style="width: 100%; height: 80px;" alt="">
+        <img  v-else="" src="../../assets/images/xuwei.jpg" style="width: 100%; height: 80px;" alt="">
+        <a v-if="info.AD_data[2]" :href="info.AD_data[2].link" target="_blank" class="ad_wrap">
+          <img :src="info.AD_data[2].img_url" style="width: 100%; height: 80px;" alt="广告">
         </a>
+        <img  v-else="" src="../../assets/images/xuwei.jpg" style="width: 100%; height: 80px;" alt="">
       </div>
     </div>
     <div :style="device !='mobile' && {'margin-left': '330px'}">
@@ -37,11 +40,11 @@
                 <el-row :gutter="20">
                   <el-col :span="5">
                     <div :class="device !='mobile' && 'new_title'">
-                      <span>{{ item.news_date }}</span>
+                      <span>{{ item.news_data }}</span>
                     </div>
                   </el-col>
                   <el-col :span="15">
-                    <div style="line-height: 30px">
+                    <div :class="device !='mobile' && 'new_title'">
                       <span>{{ item.news_title }}</span>
                     </div>
                   </el-col>
@@ -187,6 +190,13 @@ export default {
     border-top: none;
     font-size: 14px;
     line-height: 40px;
+  }
+
+  .ad_wrap {
+    display: inline-block;
+    width: 100%;
+    height: 80px;
+    background: #eee;
   }
 
 </style>

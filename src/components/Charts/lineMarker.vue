@@ -92,7 +92,7 @@ export default {
         },
         grid: {
           top: 100,
-          left: '0%',
+          left: '2%',
           right: '4%',
           bottom: '2%',
           containLabel: true
@@ -136,7 +136,6 @@ export default {
         this.legend.push(v.name)
       })
       option.series = this.charts_data.series
-      console.log('option', option)
       this.chart.setOption(option)
     }
   }

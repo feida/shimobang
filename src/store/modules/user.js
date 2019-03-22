@@ -1,12 +1,22 @@
-import { getInfo } from '@/api/api'
+import { getInfo, getUserInfo } from '@/api/api'
 import { getToken, removeToken, removeCookie } from '@/utils/auth'
+import { getQueryString } from '@/utils/index'
 
 const user = {
   state: {
     token: getToken(),
     name: '',
     loading: true,
-    info: {}
+    info: {
+      bg_url: '',
+      email: '',
+      logo_url: '',
+      qrcode_url: '',
+      telphone: '',
+      AD_data: [],
+
+    },
+
   },
 
   mutations: {
@@ -20,7 +30,6 @@ const user = {
       state.loading = value
     },
     SET_INFO: (state, info) => {
-      console.log('set', info)
       state.info = info
     }
 
@@ -32,15 +41,27 @@ const user = {
       return new Promise((resolve, reject) => {
         getInfo().then(response => {
           console.log('基本资料', response)
-          if (response) {
+          if (response.code == '0000') {
             commit('SET_INFO', response.data)
-            /* setToken(response.token)
-            setCookie('userName', response.userName)
-            setCookie('brandName', response.brandName)
-            commit('SET_TOKEN', response.token)
-            commit('SET_NAME', response.userName)*/
-            resolve()
           }
+          resolve()
+        }).catch(error => {
+          reject(error)
+        })
+      })
+    },
+
+    GetUserInfo({ commit }) {
+      return new Promise((resolve, reject) => {
+        getUserInfo().then(response => {
+          console.log('getUserInfo', response)
+          if (response.code == '0000' && response.data) {
+            // commit('SET_NAME', response.data.username)
+            sessionStorage.setItem('userName', response.data.name)
+            sessionStorage.setItem('customer_id', response.data.customer_id)
+            // setSession('userName', response.data.name);
+          }
+          resolve()
         }).catch(error => {
           reject(error)
         })
@@ -52,8 +73,6 @@ const user = {
       return new Promise(resolve => {
         commit('SET_TOKEN', '')
         removeToken()
-        removeCookie('userName')
-        removeCookie('brandName')
         resolve()
       })
     }

@@ -1,9 +1,9 @@
 <template>
   <div class="app-wrapper" >
     <navbar/>
-    <div style="">
-      <img id="img" :src="info.bg_url" :style="device == 'mobile' && {'height': '220px'}" style="width: 100%; height: 360px" alt="">
-      <!--<img src="../../assets/images/background.jpg" style="width: 100%;" alt="">-->
+    <div style="width: 100%; height: 360px; background: #eee; " :style="device == 'mobile' && {'height': '220px'}">
+      <img id="img" :src="info.bg_url"  style="width: 100%; height: 360px" :style="device == 'mobile' && {'height': '220px'}" alt="banner">
+      <!--<img id="img" src="../../assets/images/background.jpg" :style="device == 'mobile' && {'height': '220px'}" style="width: 100%; height: 360px" alt="">-->
     </div>
     <div class="main-container">
       <app-main/>
@@ -19,7 +19,7 @@
         <el-col :xs="24" :sm="24" :md="12" :lg="12" :xl="12" >
           <div>
             <div style="width: 150px; margin: 0 auto; margin-top: 30px;">
-              <img :src="info.qrcode_url" style="width: 120px; height: 120px;" alt="">
+              <img :src="info.qrcode_url" style="width: 120px; height: 120px;" alt="二维码">
               <p>扫码二维码，关注我们</p>
             </div>
 

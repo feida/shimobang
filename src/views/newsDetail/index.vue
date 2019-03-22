@@ -31,11 +31,11 @@
     <div :style="device !='mobile' && {'margin-left': '330px'}" class="container">
       <h3 style="text-align: center; font-size: 24px;">{{ newsDetailData.news_title }}</h3>
       <p style="text-align: center; color: rgb(62, 62, 62)">
-        <span>编辑：{{ newsDetailData.news_author }}</span>
+        <span>编辑：{{ newsDetailData['news_ author'] }}</span>
         <span style=" margin-left: 50px">{{ newsDetailData.news_date }}</span>
       </p>
-      <div>
-        {{ newsDetailData.news_content }}
+      <div v-html="newsDetailData['news_ content']">
+
       </div>
     </div>
 

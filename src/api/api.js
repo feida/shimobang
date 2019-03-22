@@ -1,5 +1,14 @@
 import request from '@/utils/request'
 
+
+// 获取用户信息
+export function getUserInfo() {
+  return request({
+    url: '/mengtan/userInfo',
+    method: 'get',
+  })
+}
+
 // 基本资料
 export function getInfo() {
   return request({
@@ -15,6 +24,7 @@ export function getTabcharts() {
     method: 'get'
   })
 }
+
 
 // 采购列表
 export function getShopList() {
@@ -75,7 +85,7 @@ export function bargaining(data) {
 }
 
 // 采购
-export function buy(data) {
+export function buyGoods(data) {
   return request({
     url: '/mengtan/buy',
     method: 'post',
