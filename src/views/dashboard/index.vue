@@ -321,9 +321,9 @@ export default {
     commitBuy(buy) {
       this.$refs[buy].validate((valid) => {
         if (valid) {
-          if(this.buyData.logistics_mode == 1) {
-            console.log('this.buyData.total_num % 32',this.buyData.total_num % 32)
-            if(this.buyData.total_num % 32 !== 0) {
+          if (this.buyData.logistics_mode == 1) {
+            console.log('this.buyData.total_num % 32', this.buyData.total_num % 32)
+            if (this.buyData.total_num % 32 !== 0) {
               this.$message({
                 message: '寄付只支持32吨/车，请输入32的整数倍采购量',
                 type: 'warning'
@@ -355,12 +355,9 @@ export default {
               this.$message.error('采购失败')
               this.dialogFormVisible1 = false
             })
-
           }).catch(() => {
 
-          });
-
-
+          })
         } else {
           return false
         }

@@ -78,7 +78,7 @@ export function bargaining(data) {
   return request({
     url: '/mengtan/bargaining',
     method: 'post',
-    data: data,
+    data: data
   })
 }
 
@@ -87,6 +87,6 @@ export function buyGoods(data) {
   return request({
     url: '/mengtan/buy',
     method: 'post',
-    data: data,
+    data: data
   })
 }

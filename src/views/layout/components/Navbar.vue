@@ -30,9 +30,9 @@ export default {
     this.$store.dispatch('GetUserInfo')
     this.username = sessionStorage.getItem('userName')
     document.title = this.info.title
-    var i = document.getElementsByTagName("meta")
-    i[4]["content"] = this.info.keyword
-    i[5]["content"] = this.info.description;
+    var i = document.getElementsByTagName('meta')
+    i[4]['content'] = this.info.keyword
+    i[5]['content'] = this.info.description
   },
   methods: {
     push() {
