@@ -28,8 +28,8 @@
       </el-row>
       <div class="footer_bottom">
         <div style="text-align: center">
-          <p>盟碳（上海国际贸易有限公司）</p>
-          <p>地址：上海市浦东新区东方路  <span style="margin-left: 20px;">邮箱：{{ info.email }}</span></p>
+          <p>{{info.copyright}}<span style="margin-left: 20px;">{{info.company_name}}</span></p>
+          <p>{{info.company_address}}<span style="margin-left: 20px;">邮箱：{{ info.email }}</span></p>
         </div>
       </div>
     </div>

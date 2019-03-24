@@ -5,7 +5,7 @@
       <!--<span style="display: inline-block; width: 180px; height: 80px; border: 1px solid #eee; text-align: center">LOGO</span>-->
     </span>
     <div class="avatar-container">
-      <a href="http://customer.mengtan.com.cn" target="_blank" v-if="username" style="color: red;font-size: 14px;">个人中心:<span style="color:#3a8ee6">{{ username }}</span></a>
+      <a v-if="username" href="http://customer.mengtan.com.cn" target="_blank" style="color: red;font-size: 14px;">个人中心:<span style="color:#3a8ee6">{{ username }}</span></a>
       <el-button v-else type="text" style="padding: 0" @click="push()">登陆/注册</el-button>
     </div>
 
@@ -17,7 +17,7 @@ import { mapGetters } from 'vuex'
 export default {
   data() {
     return {
-      username: sessionStorage.getItem('userName')
+      username: ''
     }
   },
   computed: {
@@ -27,6 +27,12 @@ export default {
     ])
   },
   created() {
+    this.$store.dispatch('GetUserInfo')
+    this.username = sessionStorage.getItem('userName')
+    document.title = this.info.title
+    var i = document.getElementsByTagName("meta")
+    i[4]["content"] = this.info.keyword
+    i[5]["content"] = this.info.description;
   },
   methods: {
     push() {

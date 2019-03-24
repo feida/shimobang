@@ -119,7 +119,7 @@
         <el-form-item label="物流方式">
           <el-radio-group v-model="buyData.logistics_mode">
             <el-radio :label="0">到付</el-radio>
-            <el-radio :abel="1">寄付</el-radio>
+            <el-radio :label="1">寄付</el-radio>
           </el-radio-group>
         </el-form-item>
         <el-form-item label="备注">
@@ -199,7 +199,7 @@ export default {
     ])
   },
   created() {
-    this.$store.dispatch('GetUserInfo')
+    //
     this.getTabchartsList()
     this.getShopListData()
     this.getNewsListData()
@@ -235,10 +235,10 @@ export default {
     // 议价
     talkPrice(m) {
       // console.log('this.customer_id',this.customer_id)
-      this.dialogFormVisible = true
-      this.talkPriceData.customer_id = '2'
-      this.talkPriceData.shop_id = m.shop_id
-      /*getUserInfo().then(res => {
+      // this.dialogFormVisible = true
+      // this.talkPriceData.customer_id = '2'
+      // this.talkPriceData.shop_id = m.shop_id
+      getUserInfo().then(res => {
         if (res.code === '0000') {
           this.dialogFormVisible = true
           this.talkPriceData.customer_id = res.data.customer_id
@@ -250,7 +250,7 @@ export default {
             this.pushLogin()
           }, 1500)
         }
-      })*/
+      })
     },
     commitTalk(talkPrice) {
       this.$refs[talkPrice].validate((valid) => {
@@ -294,12 +294,12 @@ export default {
 
     // 采购
     buy_goods(m) {
-      this.buyData.customer_id = '2'
-      this.buyData.goods_id = m.shop_id
-      this.buyData.goods_name = m.shop_name
-      this.buyData.price = m.price
-      this.dialogFormVisible1 = true
-      /*getUserInfo().then(res => {
+      // this.buyData.customer_id = '2'
+      // this.buyData.goods_id = m.shop_id
+      // this.buyData.goods_name = m.shop_name
+      // this.buyData.price = m.price
+      // this.dialogFormVisible1 = true
+      getUserInfo().then(res => {
         if (res.code === '0000') {
           this.buyData.customer_id = res.data.customer_id
           this.buyData.goods_id = m.shop_id
@@ -312,7 +312,7 @@ export default {
             this.pushLogin()
           }, 1500)
         }
-      })*/
+      })
     },
     cancelBuy() {
       this.dialogFormVisible1 = false
@@ -321,24 +321,46 @@ export default {
     commitBuy(buy) {
       this.$refs[buy].validate((valid) => {
         if (valid) {
-          buyGoods(this.buyData).then(response => {
-            console.log('buyData', response)
-            if (response.code === '0000') {
+          if(this.buyData.logistics_mode == 1) {
+            console.log('this.buyData.total_num % 32',this.buyData.total_num % 32)
+            if(this.buyData.total_num % 32 !== 0) {
               this.$message({
-                message: response.msg ? response.msg : '您的采购请求已发送给工作人员，工作人员将尽快与您联系！',
-                type: 'success'
+                message: '寄付只支持32吨/车，请输入32的整数倍采购量',
+                type: 'warning'
               })
-              this.dialogFormVisible1 = false
-            } else {
-              this.$message({
-                message: response.msg ? response.msg : '采购失败',
-                type: 'error'
-              })
+              return
             }
+          }
+
+          this.$confirm('该价格为不含运费价格，工作人员会尽快与您联系洽商运费事宜', '提示', {
+            confirmButtonText: '继续下单',
+            cancelButtonText: '取消',
+            type: 'warning'
+          }).then(() => {
+            buyGoods(this.buyData).then(response => {
+              console.log('buyData', response)
+              if (response.code === '0000') {
+                this.$message({
+                  message: response.msg ? response.msg : '您的采购请求已发送给工作人员，工作人员将尽快与您联系！',
+                  type: 'success'
+                })
+                this.dialogFormVisible1 = false
+              } else {
+                this.$message({
+                  message: response.msg ? response.msg : '采购失败',
+                  type: 'error'
+                })
+              }
+            }).catch(() => {
+              this.$message.error('采购失败')
+              this.dialogFormVisible1 = false
+            })
+
           }).catch(() => {
-            this.$message.error('采购失败')
-            this.dialogFormVisible1 = false
-          })
+
+          });
+
+
         } else {
           return false
         }
