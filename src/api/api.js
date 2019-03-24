@@ -1,5 +1,5 @@
 import request from '@/utils/request'
-// import qs from 'qs'
+import qs from 'qs'
 // 获取用户信息
 export function getUserInfo() {
   return request({
@@ -79,11 +79,13 @@ export function bargaining(data1) {
     url: '/mengtan/bargaining',
     method: 'post',
     transformRequest: [function(data) {      //在请求之前对data传参进行格式转换
-      data = JSON.stringify(data)
+      // data = JSON.stringify(data)
+      data = qs.stringify(data)
       return data
     }],
     headers: {
-      'Content-Type': 'application/json'
+      // 'Content-Type': 'application/json'
+      'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
     },
     data: data1
   })
@@ -96,11 +98,13 @@ export function buyGoods(data1) {
     method: 'post',
     // data: data,
     transformRequest: [function(data) {      //在请求之前对data传参进行格式转换
-      data = JSON.stringify(data)
+      // data = JSON.stringify(data)
+      data = qs.stringify(data)
       return data
     }],
     headers: {
-      'Content-Type': 'application/json'
+      // 'Content-Type': 'application/json'
+      'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
     },
     data: data1
   })
