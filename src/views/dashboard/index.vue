@@ -234,7 +234,6 @@ export default {
 
     // 议价
     talkPrice(m) {
-      // console.log('this.customer_id',this.customer_id)
       // this.dialogFormVisible = true
       // this.talkPriceData.customer_id = '2'
       // this.talkPriceData.shop_id = m.shop_id

@@ -1,5 +1,5 @@
 import request from '@/utils/request'
-
+// import qs from 'qs'
 // 获取用户信息
 export function getUserInfo() {
   return request({
@@ -74,19 +74,34 @@ export function hotProduct() {
 }
 
 // 议价
-export function bargaining(data) {
+export function bargaining(data1) {
   return request({
     url: '/mengtan/bargaining',
     method: 'post',
-    data: data
+    transformRequest: [function(data) {      //在请求之前对data传参进行格式转换
+      data = JSON.stringify(data)
+      return data
+    }],
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    data: data1
   })
 }
 
 // 采购
-export function buyGoods(data) {
+export function buyGoods(data1) {
   return request({
     url: '/mengtan/buy',
     method: 'post',
-    data: data
+    // data: data,
+    transformRequest: [function(data) {      //在请求之前对data传参进行格式转换
+      data = JSON.stringify(data)
+      return data
+    }],
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    data: data1
   })
 }

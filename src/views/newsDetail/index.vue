@@ -84,6 +84,10 @@ export default {
         console.log('newsDetail', response)
         if (response.data) {
           this.newsDetailData = response.data
+          document.title = response.data.news_title
+          var i = document.getElementsByTagName('meta')
+          i[4]['content'] = response.data.keyword
+          i[5]['content'] = response.data.description
         }
       })
     }
