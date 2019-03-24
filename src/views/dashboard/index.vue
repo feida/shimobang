@@ -235,7 +235,10 @@ export default {
     // 议价
     talkPrice(m) {
       // console.log('this.customer_id',this.customer_id)
-      getUserInfo().then(res => {
+      this.dialogFormVisible = true
+      this.talkPriceData.customer_id = '2'
+      this.talkPriceData.shop_id = m.shop_id
+      /*getUserInfo().then(res => {
         if (res.code === '0000') {
           this.dialogFormVisible = true
           this.talkPriceData.customer_id = res.data.customer_id
@@ -247,7 +250,7 @@ export default {
             this.pushLogin()
           }, 1500)
         }
-      })
+      })*/
     },
     commitTalk(talkPrice) {
       this.$refs[talkPrice].validate((valid) => {
@@ -291,9 +294,13 @@ export default {
 
     // 采购
     buy_goods(m) {
-      getUserInfo().then(res => {
+      this.buyData.customer_id = '2'
+      this.buyData.goods_id = m.shop_id
+      this.buyData.goods_name = m.shop_name
+      this.buyData.price = m.price
+      this.dialogFormVisible1 = true
+      /*getUserInfo().then(res => {
         if (res.code === '0000') {
-          // this.buyData.customer_id = this.customer_id
           this.buyData.customer_id = res.data.customer_id
           this.buyData.goods_id = m.shop_id
           this.buyData.goods_name = m.shop_name
@@ -305,7 +312,7 @@ export default {
             this.pushLogin()
           }, 1500)
         }
-      })
+      })*/
     },
     cancelBuy() {
       this.dialogFormVisible1 = false
@@ -380,7 +387,7 @@ export default {
 
     // 跳转登陆页
     pushLogin() {
-      window.open(process.env.BASE_API + '/toLogin', '_self')
+      window.open(process.env.BASE_API + '/toLogin?callbackUrl=http://www.mengtan.com.cn', '_self')
     }
   }
 }

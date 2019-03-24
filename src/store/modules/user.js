@@ -56,7 +56,7 @@ const user = {
           console.log('getUserInfo', response)
           if (response.code === '0000' && response.data) {
             // commit('SET_NAME', response.data.username)
-            sessionStorage.setItem('userName', response.data.name)
+            sessionStorage.setItem('userName', response.data.username)
             sessionStorage.setItem('customer_id', response.data.customer_id)
             // setSession('userName', response.data.name);
           }

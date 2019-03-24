@@ -5,7 +5,7 @@
       <!--<span style="display: inline-block; width: 180px; height: 80px; border: 1px solid #eee; text-align: center">LOGO</span>-->
     </span>
     <div class="avatar-container">
-      <span v-if="username" >欢迎用户:<span style="color:#3a8ee6">{{ username }}</span></span>
+      <a href="http://customer.mengtan.com.cn" target="_blank" v-if="username" style="color: red;font-size: 14px;">个人中心:<span style="color:#3a8ee6">{{ username }}</span></a>
       <el-button v-else type="text" style="padding: 0" @click="push()">登陆/注册</el-button>
     </div>
 
@@ -30,7 +30,7 @@ export default {
   },
   methods: {
     push() {
-      window.open(process.env.BASE_API + '/toLogin', '_self')
+      window.open(process.env.BASE_API + '/toLogin?callbackUrl=http://www.mengtan.com.cn', '_self')
     },
     // 首页
     pushDashBoard() {

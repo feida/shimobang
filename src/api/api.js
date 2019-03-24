@@ -78,7 +78,10 @@ export function bargaining(data) {
   return request({
     url: '/mengtan/bargaining',
     method: 'post',
-    data: data
+    data: data,
+    headers: {
+      'Content-type': 'application/json;charset=UTF-8'
+    },
   })
 }
 
@@ -87,6 +90,9 @@ export function buyGoods(data) {
   return request({
     url: '/mengtan/buy',
     method: 'post',
-    data: data
+    data: data,
+    headers: {
+      'Content-type': 'application/json;charset=UTF-8'
+    },
   })
 }

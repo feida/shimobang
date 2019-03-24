@@ -12,7 +12,8 @@ module.exports = {
     proxyTable: {
       '/mengtan': {
         // target: 'http://139.196.222.42:5009/report-bi',
-         target: 'http://106.15.191.194:8080/mengtan',
+         // target: 'http://106.15.191.194:8080/mengtan',
+         target: 'http://customer.mengtan.com.cn/mengtan',
         // target: 'http://yapi.demo.qunar.com/mock/54669/mengtan',
         changeOrigin: true,
         secure: false,
