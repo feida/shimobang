@@ -75,7 +75,7 @@ const user = {
     GetNewsCategoryList({ commit }) {
       return new Promise((resolve, reject) => {
         getNews_category().then(response => {
-          console.log('基本资料', response)
+          console.log('getNews_category', response)
           if (response.code === '0000') {
             commit('SET_NEWS_CATEGORYDATA', response.data)
           }

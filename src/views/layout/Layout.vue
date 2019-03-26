@@ -122,7 +122,6 @@ export default {
 
     // 更多新闻
     pushMore(id) {
-      console.log('id444', id)
       this.$router.push('/newsMore/index/' + id)
     }
   }

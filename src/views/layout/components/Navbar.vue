@@ -50,7 +50,7 @@ export default {
       getUserInfo().then(res => {
         if (res.code === '0000') {
           this.username = res.data.username
-        } else if (res.code === '0002') {}
+        }
       })
     },
     push() {
