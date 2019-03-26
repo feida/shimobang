@@ -7,7 +7,7 @@
           <div class="menu_wrap" style="border-left: 1px solid #eee;">
             <span class="menu_title">全部产品分类</span>
           </div>
-          <div class="menu_wrap"  @click="pushDashBoard">
+          <div class="menu_wrap" @click="pushDashBoard">
             <span class="menu_title">首页</span>
           </div>
           <div class="menu_wrap">
@@ -18,7 +18,7 @@
               <span class="menu_title" >快讯行情</span>
               <el-dropdown-menu slot="dropdown">
                 <el-dropdown-item v-for="item in news_categoryData" :key="item.news_category_id" >
-                  <span @click="pushMore(item.news_category_id)">{{item.news_category}}</span>
+                  <span @click="pushMore(item.news_category_id)">{{ item.news_category }}</span>
                 </el-dropdown-item>
               </el-dropdown-menu>
             </el-dropdown>
@@ -111,7 +111,6 @@ export default {
   },
   created() {
     this.$store.dispatch('GetNewsCategoryList')
-
   },
   mounted() {
   },
@@ -123,9 +122,9 @@ export default {
 
     // 更多新闻
     pushMore(id) {
-      console.log('id444',id)
+      console.log('id444', id)
       this.$router.push('/newsMore/index/' + id)
-    },
+    }
   }
 }
 </script>

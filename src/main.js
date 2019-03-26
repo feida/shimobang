@@ -27,9 +27,9 @@ import {
   MessageBox
 } from 'element-ui'
 
-Vue.use(Dropdown);
-Vue.use(DropdownMenu);
-Vue.use(DropdownItem);
+Vue.use(Dropdown)
+Vue.use(DropdownMenu)
+Vue.use(DropdownItem)
 Vue.use(Pagination)
 Vue.use(Dialog)
 Vue.use(Input)

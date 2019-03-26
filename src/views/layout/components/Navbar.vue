@@ -2,10 +2,9 @@
   <div class="navbar" >
     <span style=" display: inline-block;width: 250px;height: 80px;margin-top: 10px; margin-left: 20px " @click="pushDashBoard">
       <img :src="info.logo_url" style="width: 250px;height: 80px; " alt="LOGO">
-      <!--<span style="display: inline-block; width: 180px; height: 80px; border: 1px solid #eee; text-align: center">LOGO</span>-->
     </span>
     <div class="avatar-container">
-      <a v-if="info.name" href="http://customer.mtsh.cn" target="_blank" style="color: red;font-size: 14px;">个人中心:<span style="color:#3a8ee6">{{ info.name }}</span></a>
+      <a v-if="username" href="http://customer.mtsh.cn" target="_blank" style="color: red;font-size: 14px;">个人中心:<span style="color:#3a8ee6">{{ username }}</span></a>
       <el-button v-else type="text" style="padding: 0" @click="push()">登陆/注册</el-button>
     </div>
 
@@ -14,6 +13,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import { getUserInfo } from '@/api/api'
 export default {
   metaInfo() {
     return {
@@ -32,7 +32,7 @@ export default {
   },
   data() {
     return {
-      username: ''
+      username: null
     }
   },
   computed: {
@@ -42,9 +42,17 @@ export default {
     ])
   },
   created() {
-    this.$store.dispatch('GetUserInfo')
+    // this.$store.dispatch('GetUserInfo')
+    this.getUser()
   },
   methods: {
+    getUser() {
+      getUserInfo().then(res => {
+        if (res.code === '0000') {
+          this.username = res.data.username
+        } else if (res.code === '0002') {}
+      })
+    },
     push() {
       window.open(process.env.BASE_API + '/toLogin?callbackUrl=http://www.mengtan.com.cn', '_self')
     },

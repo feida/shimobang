@@ -155,7 +155,8 @@ export default {
         price: '',
         count: '',
         shop_id: '',
-        customer_id: ''
+        customer_id: '',
+        shop_name: ''
       },
       buyData: {
         customer_id: '',
@@ -242,6 +243,7 @@ export default {
           this.dialogFormVisible = true
           this.talkPriceData.customer_id = res.data.customer_id
           this.talkPriceData.shop_id = m.shop_id
+          this.talkPriceData.shop_name = m.shop_name
         } else if (res.code === '0002') {
           this.$message.error(res.msg)
 
@@ -287,7 +289,8 @@ export default {
         price: '',
         count: '',
         shop_id: '',
-        customer_id: ''
+        customer_id: '',
+        shop_name: ''
       }
     },
 
@@ -320,7 +323,7 @@ export default {
     commitBuy(buy) {
       this.$refs[buy].validate((valid) => {
         if (valid) {
-          if (this.buyData.logistics_mode == 1) {
+          if (this.buyData.logistics_mode === 1) {
             console.log('this.buyData.total_num % 32', this.buyData.total_num % 32)
             if (this.buyData.total_num % 32 !== 0) {
               this.$message({
