@@ -7,12 +7,12 @@
         </div>
         <div style="text-align: center;">
           <el-row>
-            <el-col :span="12" class="hot_product">产品</el-col>
-            <el-col :span="12" class="hot_product">价格</el-col>
+            <el-col :span="16" class="hot_product">产品</el-col>
+            <el-col :span="8" class="hot_product">价格 元／吨</el-col>
           </el-row>
           <el-row v-for=" item in hotProductData" :key="item.name">
-            <el-col :span="12" class="hot_product">{{ item.name }}</el-col>
-            <el-col :span="12" class="hot_product">{{ item.price }}</el-col>
+            <el-col :span="16" class="hot_product">{{ item.name }}</el-col>
+            <el-col :span="8" class="hot_product">{{ item.price }}</el-col>
           </el-row>
         </div>
       </div>
@@ -45,6 +45,21 @@ import { hotProduct, newsDetail } from '@/api/api'
 import { mapGetters } from 'vuex'
 
 export default {
+  metaInfo() {
+    return {
+      title: this.newsDetailData.news_title,
+      meta: [
+        {
+          name: 'keywords',
+          content: this.newsDetailData.keyword
+        },
+        {
+          name: 'description',
+          content: this.newsDetailData.description
+        }
+      ]
+    }
+  },
   data() {
     return {
       hotProductData: [],
@@ -84,10 +99,6 @@ export default {
         console.log('newsDetail', response)
         if (response.data) {
           this.newsDetailData = response.data
-          document.title = response.data.news_title
-          var i = document.getElementsByTagName('meta')
-          i[4]['content'] = response.data.keyword
-          i[5]['content'] = response.data.description
         }
       })
     }

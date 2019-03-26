@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import 'babel-polyfill'
 import 'normalize.css/normalize.css' // A modern alternative to CSS resets
+import MetaInfo from 'vue-meta-info'
 
 import {
   Pagination,
@@ -63,6 +64,7 @@ import '@/permission' // permission control
 
 // Vue.use(ElementUI, { locale })
 
+Vue.use(MetaInfo)
 Vue.config.productionTip = false
 
 new Vue({

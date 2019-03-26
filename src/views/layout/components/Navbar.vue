@@ -1,11 +1,11 @@
 <template>
   <div class="navbar" >
-    <span style=" display: inline-block;width: 180px;height: 80px; " @click="pushDashBoard">
-      <img :src="info.logo_url" style="width: 180px;height: 80px; " alt="LOGO">
+    <span style=" display: inline-block;width: 250px;height: 80px;margin-top: 10px; margin-left: 20px " @click="pushDashBoard">
+      <img :src="info.logo_url" style="width: 250px;height: 80px; " alt="LOGO">
       <!--<span style="display: inline-block; width: 180px; height: 80px; border: 1px solid #eee; text-align: center">LOGO</span>-->
     </span>
     <div class="avatar-container">
-      <a v-if="info.name" href="http://customer.mengtan.com.cn" target="_blank" style="color: red;font-size: 14px;">个人中心:<span style="color:#3a8ee6">{{ info.name }}</span></a>
+      <a v-if="info.name" href="http://customer.mtsh.cn" target="_blank" style="color: red;font-size: 14px;">个人中心:<span style="color:#3a8ee6">{{ info.name }}</span></a>
       <el-button v-else type="text" style="padding: 0" @click="push()">登陆/注册</el-button>
     </div>
 
@@ -15,6 +15,21 @@
 <script>
 import { mapGetters } from 'vuex'
 export default {
+  metaInfo() {
+    return {
+      title: this.info.title,
+      meta: [
+        {
+          name: 'keywords',
+          content: this.info.keyword
+        },
+        {
+          name: 'description',
+          content: this.info.description
+        }
+      ]
+    }
+  },
   data() {
     return {
       username: ''
@@ -28,11 +43,6 @@ export default {
   },
   created() {
     this.$store.dispatch('GetUserInfo')
-    // this.username = sessionStorage.getItem('userName')
-    document.title = this.info.title
-    var i = document.getElementsByTagName('meta')
-    i[4]['content'] = this.info.keyword
-    i[5]['content'] = this.info.description
   },
   methods: {
     push() {
@@ -48,9 +58,9 @@ export default {
 
 <style rel="stylesheet/scss" lang="scss" scoped>
 .navbar {
-  height: 80px;
+  height: 100px;
   //background-color: #f6f6f6;
-  background-color: #404553;
+  //background-color: #404553;
   //margin: 20px 0;
   //height: 60px;
   //line-height: 60px;
@@ -60,7 +70,7 @@ export default {
     display: inline-block;
     position: absolute;
     right: 20px;
-    top: 30px;
+    top: 40px;
   }
 }
 </style>

@@ -1,7 +1,7 @@
 <template>
   <div class="app-wrapper" >
     <navbar/>
-    <div :style="device == 'mobile' && {'height': '220px'}" style="width: 100%; height: 360px; background: #eee; ">
+    <div :style="device == 'mobile' && {'height': '220px'}" style="width: 100%; height: 360px; background: #eee; margin-bottom: 20px; ">
       <img id="img" :src="info.bg_url" :style="device == 'mobile' && {'height': '220px'}" style="width: 100%; height: 360px" alt="banner">
       <!--<img id="img" src="../../assets/images/background.jpg" :style="device == 'mobile' && {'height': '220px'}" style="width: 100%; height: 360px" alt="">-->
     </div>
@@ -10,26 +10,37 @@
     </div>
     <div class="footer">
       <el-row>
-        <el-col :xs="24" :sm="24" :md="12" :lg="12" :xl="12" >
+        <el-col :xs="24" :sm="24" :md="16" :lg="16" :xl="16" >
           <div style="margin: 0 auto;">
-            <p style="font-size: 24px;">联系方式:</p>
-            <p style="font-size: 28px; color: red">{{ info.telphone }}</p>
+            <p/>
+            <!--<p style="font-size: 24px;">联系方式:</p>-->
+            <!--<p style="font-size: 28px; color: red">{{ info.telphone }}</p>-->
           </div>
         </el-col>
-        <el-col :xs="24" :sm="24" :md="12" :lg="12" :xl="12" >
+        <el-col :xs="24" :sm="24" :md="8" :lg="8" :xl="8" >
           <div>
-            <div style="width: 150px; margin: 0 auto; margin-top: 30px;">
+            <div style="width: 150px; margin: 0 auto; margin-top: 20px;">
               <img :src="info.qrcode_url" style="width: 120px; height: 120px;" alt="二维码">
               <p>扫码二维码，关注我们</p>
             </div>
-
           </div>
         </el-col>
       </el-row>
       <div class="footer_bottom">
-        <div style="text-align: center">
-          <p>{{ info.copyright }}<span style="margin-left: 20px;">{{ info.company_name }}</span></p>
-          <p>{{ info.company_address }}<span style="margin-left: 20px;">邮箱：{{ info.email }}</span></p>
+        <div style="text-align: center; margin: 0 10px;">
+          <p><span >{{ info.company_name }}</span></p>
+          <p>
+            <span>
+              地址：{{ info.company_address }}
+            </span>
+            <span style="margin-left: 20px;">
+              邮箱：{{ info.email }}
+            </span>
+            <span style="margin-left: 20px;">
+              联系方式：{{ info.telphone }}
+            </span>
+          </p>
+          <p>{{ info.copyright }}</p>
         </div>
       </div>
     </div>
@@ -103,12 +114,14 @@ export default {
 
   }
   .footer {
-    min-height: 200px;
+    margin-top: 10px;
+    border-top: 2px solid #E4E7ED;
+    /*min-height: 200px;*/
     text-align: center;
     font-size: 14px;
-    color: #fff;
-    padding-bottom: 15px;
-    background-color: #141414;
+    color: #333;
+    padding-bottom: 20px;
+    background-color: #fff;
     position: relative;
   }
   .footer_bottom {

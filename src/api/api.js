@@ -78,7 +78,7 @@ export function bargaining(data1) {
   return request({
     url: '/mengtan/bargaining',
     method: 'post',
-    transformRequest: [function(data) {      //在请求之前对data传参进行格式转换
+    transformRequest: [function(data) { // 在请求之前对data传参进行格式转换
       // data = JSON.stringify(data)
       data = qs.stringify(data)
       return data
@@ -97,7 +97,7 @@ export function buyGoods(data1) {
     url: '/mengtan/buy',
     method: 'post',
     // data: data,
-    transformRequest: [function(data) {      //在请求之前对data传参进行格式转换
+    transformRequest: [function(data) { // 在请求之前对data传参进行格式转换
       // data = JSON.stringify(data)
       data = qs.stringify(data)
       return data

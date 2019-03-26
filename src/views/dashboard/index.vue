@@ -73,7 +73,7 @@
           <div class="grid-content bg-purple">
             <div>
               <h4 style="display:inline-block;">  {{ item.news_category }} </h4>
-              <span style="float: right; line-height: 60px; color: #3a8ee6;" @click="pushMore">更多>></span>
+              <span style="float: right; line-height: 60px; color: #3a8ee6; cursor: pointer;" @click="pushMore(item.news_category_id)">更多>></span>
             </div>
             <div v-for=" ( m, n ) in item.data_list" :key="'list' + n" class="news_wrap" @click="pushDetail(m.news_id)">
               <span class="newsTitle">{{ m.news_title.length > 20 ? m.news_title.substring(0,20) + '...' : m.news_title }}</span>
@@ -387,8 +387,9 @@ export default {
     },
 
     // 更多新闻
-    pushMore() {
-      this.$router.push('/newsMore/index')
+    pushMore(id) {
+      console.log('id', id)
+      this.$router.push('/newsMore/index/' + id)
     },
 
     // 新闻详情
@@ -426,6 +427,9 @@ export default {
 
   .el-collapse-item__content {
     padding-bottom: 0;
+  }
+  .el-collapse-item__arrow {
+    line-height: 48px;
   }
   .el-tabs__header {
     margin: 0;
@@ -481,6 +485,10 @@ export default {
     position: relative;
     font-size: 14px;
     color: #333;
+  }
+
+  .news_wrap span {
+    cursor: pointer;
   }
 
   .news_wrap:hover {

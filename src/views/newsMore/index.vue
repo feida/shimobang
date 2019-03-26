@@ -7,12 +7,12 @@
         </div>
         <div style="text-align: center;">
           <el-row>
-            <el-col :span="12" class="hot_product">产品</el-col>
-            <el-col :span="12" class="hot_product">价格</el-col>
+            <el-col :span="16" class="hot_product">产品</el-col>
+            <el-col :span="8" class="hot_product">价格 元／吨</el-col>
           </el-row>
           <el-row v-for=" item in hotProductData" :key="item.name">
-            <el-col :span="12" class="hot_product">{{ item.name }}</el-col>
-            <el-col :span="12" class="hot_product">{{ item.price }}</el-col>
+            <el-col :span="16" class="hot_product">{{ item.name }}</el-col>
+            <el-col :span="8" class="hot_product">{{ item.price }}</el-col>
           </el-row>
         </div>
       </div>
@@ -32,25 +32,25 @@
       </div>
     </div>
     <div :style="device !='mobile' && {'margin-left': '330px'}">
-      <el-tabs type="card" class="tabs" @tab-click="handleClick" >
-        <el-tab-pane v-for=" (item,index) in news_categoryData" :label="item.news_category" :key="index">
+      <el-tabs v-model="news_category_id" type="card" class="tabs" @tab-click="handleClick" >
+        <el-tab-pane v-for=" (item,index) in news_categoryData" :label="item.news_category" :key="index" :name="item.news_category_id">
           <div>
             <div class="container">
               <div v-for="item in newsList" :key="item.news_id" class="itemWrap" @click="pushDetail(item.news_id)">
                 <el-row :gutter="20">
                   <el-col :span="5">
                     <div :class="device !='mobile' && 'new_title'">
-                      <span>{{ item.news_data }}</span>
+                      <span style="cursor: pointer;">{{ item.news_data }}</span>
                     </div>
                   </el-col>
                   <el-col :span="15">
                     <div :class="device !='mobile' && 'new_title'">
-                      <span>{{ item.news_title }}</span>
+                      <span style="cursor: pointer;">{{ item.news_title }}</span>
                     </div>
                   </el-col>
                   <el-col :span="4">
                     <div :class="device !='mobile' && 'new_title'">
-                      <span style="color: #3a8ee6;">阅读全文</span>
+                      <span style="color: #3a8ee6; cursor: pointer;">阅读全文</span>
                     </div>
                   </el-col>
                 </el-row>
@@ -86,7 +86,7 @@ export default {
       page: 1,
       num: 10,
       total: 1000,
-      news_category_id: '',
+      news_category_id: this.$route.params.news_category_id,
       news_categoryData: [],
       newsList: [],
       hotProductData: []
@@ -112,7 +112,6 @@ export default {
         console.log('getNews_category', response)
         if (response.data) {
           this.news_categoryData = response.data
-          this.news_category_id = response.data[0].news_category_id
           this.getAllNewsList()
         }
       })
@@ -212,7 +211,10 @@ export default {
     font-size: 16px;
     padding: 0 15px;
   }
-
+  .el-tabs__item {
+    width: 209px;
+    text-align: center;
+  }
   .el-collapse-item__content {
     padding-bottom: 0;
   }

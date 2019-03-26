@@ -40,7 +40,7 @@ export const constantRouterMap = [
     component: Layout,
     children: [
       {
-        path: 'index',
+        path: 'index/:news_category_id',
         name: 'newsMore',
         component: () => import('@/views/newsMore/index')
       }
