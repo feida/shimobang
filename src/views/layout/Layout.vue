@@ -1,9 +1,47 @@
 <template>
   <div class="app-wrapper" >
     <navbar/>
+    <div style="height: 50px; background: skyblue;position: relative;">
+      <div style=" max-width: 1170px; margin: 0 auto; overflow-x: auto; overflow-y: hidden; height: 50px; ">
+        <div style="width: 1018px; height: 50px; display: inline-block;">
+          <div class="menu_wrap" style="border-left: 1px solid #eee;">
+            <span class="menu_title">全部产品分类</span>
+          </div>
+          <div class="menu_wrap"  @click="pushDashBoard">
+            <span class="menu_title">首页</span>
+          </div>
+          <div class="menu_wrap">
+            <span class="menu_title" >平台介绍</span>
+          </div>
+          <div class="menu_wrap">
+            <el-dropdown trigger="hover">
+              <span class="menu_title" >快讯行情</span>
+              <el-dropdown-menu slot="dropdown">
+                <el-dropdown-item v-for="item in news_categoryData" :key="item.news_category_id" >
+                  <span @click="pushMore(item.news_category_id)">{{item.news_category}}</span>
+                </el-dropdown-item>
+              </el-dropdown-menu>
+            </el-dropdown>
+          </div>
+          <div class="menu_wrap">
+            <el-dropdown trigger="hover">
+              <span class="menu_title">联系我们</span>
+              <el-dropdown-menu slot="dropdown">
+                <el-dropdown-item >
+                  <span>联系我们</span>
+                </el-dropdown-item>
+                <el-dropdown-item >
+                  <span>意见反馈</span>
+                </el-dropdown-item>
+              </el-dropdown-menu>
+            </el-dropdown>
+          </div>
+        </div>
+
+      </div>
+    </div>
     <div :style="device == 'mobile' && {'height': '220px'}" style="width: 100%; height: 360px; background: #eee; margin-bottom: 20px; ">
       <img id="img" :src="info.bg_url" :style="device == 'mobile' && {'height': '220px'}" style="width: 100%; height: 360px" alt="banner">
-      <!--<img id="img" src="../../assets/images/background.jpg" :style="device == 'mobile' && {'height': '220px'}" style="width: 100%; height: 360px" alt="">-->
     </div>
     <div class="main-container">
       <app-main/>
@@ -60,7 +98,7 @@ export default {
   mixins: [ResizeMixin],
   computed: {
     ...mapGetters([
-      'loading',
+      'news_categoryData',
       'info'
     ]),
     device() {
@@ -72,13 +110,22 @@ export default {
 
   },
   created() {
-    // this.init()
-    // console.log('device3333',this.device,this.info)
+    this.$store.dispatch('GetNewsCategoryList')
+
   },
   mounted() {
   },
   methods: {
+    // 首页
+    pushDashBoard() {
+      this.$router.push('/')
+    },
 
+    // 更多新闻
+    pushMore(id) {
+      console.log('id444',id)
+      this.$router.push('/newsMore/index/' + id)
+    },
   }
 }
 </script>
@@ -112,6 +159,20 @@ export default {
     margin: 0 auto;
     //background-color: #eee;
 
+  }
+
+  .menu_wrap {
+    display: inline-block;
+    width: 200px;
+    line-height: 50px;
+    text-align: center;
+    border-right: 1px solid #eee;
+  }
+  .menu_title {
+    font-size: 16px;
+    color: #fff;
+    cursor: pointer;
+    font-weight: 600;
   }
   .footer {
     margin-top: 10px;

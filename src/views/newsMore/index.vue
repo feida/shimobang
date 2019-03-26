@@ -87,14 +87,15 @@ export default {
       num: 10,
       total: 1000,
       news_category_id: this.$route.params.news_category_id,
-      news_categoryData: [],
+      // news_categoryData: [],
       newsList: [],
       hotProductData: []
     }
   },
   computed: {
     ...mapGetters([
-      'info'
+      'info',
+      'news_categoryData'
     ]),
     device() {
       return this.$store.state.app.device
@@ -102,8 +103,9 @@ export default {
 
   },
   created() {
-    this.getNewsCategoryList()
+    // this.getNewsCategoryList()
     this.getHotProductList()
+    this.getAllNewsList()
   },
   methods: {
     // 新闻类别
@@ -112,7 +114,6 @@ export default {
         console.log('getNews_category', response)
         if (response.data) {
           this.news_categoryData = response.data
-          this.getAllNewsList()
         }
       })
     },

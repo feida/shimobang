@@ -1,4 +1,4 @@
-import { getInfo, getUserInfo } from '@/api/api'
+import { getInfo, getUserInfo, getNews_category } from '@/api/api'
 import { getToken, removeToken } from '@/utils/auth'
 
 const user = {
@@ -13,8 +13,8 @@ const user = {
       qrcode_url: '',
       telphone: '',
       AD_data: []
-
-    }
+    },
+    news_categoryData: []
 
   },
 
@@ -30,6 +30,9 @@ const user = {
     },
     SET_INFO: (state, info) => {
       state.info = info
+    },
+    SET_NEWS_CATEGORYDATA: (state, news_categoryData) => {
+      state.news_categoryData = news_categoryData
     }
 
   },
@@ -50,6 +53,7 @@ const user = {
       })
     },
 
+    // 用户信息
     GetUserInfo({ commit }) {
       return new Promise((resolve, reject) => {
         getUserInfo().then(response => {
@@ -59,6 +63,21 @@ const user = {
             // sessionStorage.setItem('userName', response.data.username)
             sessionStorage.setItem('customer_id', response.data.customer_id)
             // setSession('userName', response.data.name);
+          }
+          resolve()
+        }).catch(error => {
+          reject(error)
+        })
+      })
+    },
+
+    // 新闻类别
+    GetNewsCategoryList({ commit }) {
+      return new Promise((resolve, reject) => {
+        getNews_category().then(response => {
+          console.log('基本资料', response)
+          if (response.code === '0000') {
+            commit('SET_NEWS_CATEGORYDATA', response.data)
           }
           resolve()
         }).catch(error => {

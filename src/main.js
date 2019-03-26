@@ -4,6 +4,9 @@ import 'normalize.css/normalize.css' // A modern alternative to CSS resets
 import MetaInfo from 'vue-meta-info'
 
 import {
+  Dropdown,
+  DropdownMenu,
+  DropdownItem,
   Pagination,
   Dialog,
   Input,
@@ -24,6 +27,9 @@ import {
   MessageBox
 } from 'element-ui'
 
+Vue.use(Dropdown);
+Vue.use(DropdownMenu);
+Vue.use(DropdownItem);
 Vue.use(Pagination)
 Vue.use(Dialog)
 Vue.use(Input)
