@@ -5,7 +5,21 @@
       <div style=" max-width: 1170px; margin: 0 auto; overflow-x: auto; overflow-y: hidden; height: 50px; ">
         <div style="width: 1018px; height: 50px; display: inline-block;">
           <div class="menu_wrap" style="border-left: 1px solid #eee;">
-            <span class="menu_title">全部产品分类</span>
+            <el-popover
+              placement="bottom"
+              width="300"
+              trigger="hover">
+              <div style="background:rgba(255,255,255,0.85);">
+                <div v-for="(item,index) in productData" :key="index" style="border-bottom: 1px solid #f4eded; padding-bottom: 6px">
+                  <span style="font-size: 14px; color: #000; display: block; padding: 8px 0;">{{ item['top_ category'] }}</span>
+                  <div v-if="item.list">
+                    <span v-for="(m, i) in item.list" :key="i + 'v'" style=" margin-right: 20px; color: #747474;font-size: 13px">{{ m }}</span>
+                  </div>
+                </div>
+              </div>
+              <span slot="reference" class="menu_title" style="display: block;">全部产品分类</span>
+            </el-popover>
+
           </div>
           <div class="menu_wrap" @click="pushDashBoard">
             <span class="menu_title">首页</span>
@@ -89,6 +103,7 @@
 import { Navbar, AppMain } from './components'
 import { mapGetters } from 'vuex'
 import ResizeMixin from './mixin/ResizeHandler'
+import { getProductList } from '@/api/api'
 export default {
   name: 'Layout',
   components: {
@@ -96,6 +111,11 @@ export default {
     AppMain
   },
   mixins: [ResizeMixin],
+  data() {
+    return {
+      productData: []
+    }
+  },
   computed: {
     ...mapGetters([
       'news_categoryData',
@@ -111,10 +131,20 @@ export default {
   },
   created() {
     this.$store.dispatch('GetNewsCategoryList')
+    this.getProductData()
   },
   mounted() {
   },
   methods: {
+    getProductData() {
+      getProductList().then(res => {
+        console.log('getProductList', res)
+        if (res.data) {
+          this.productData = res.data
+        }
+      })
+    },
+
     // 首页
     pushDashBoard() {
       this.$router.push('/')

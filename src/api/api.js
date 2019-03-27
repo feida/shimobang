@@ -16,6 +16,14 @@ export function getInfo() {
   })
 }
 
+// 产品分类
+export function getProductList() {
+  return request({
+    url: '/mengtan/product',
+    method: 'get'
+  })
+}
+
 // tabcharts
 export function getTabcharts() {
   return request({

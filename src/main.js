@@ -8,6 +8,7 @@ import {
   DropdownMenu,
   DropdownItem,
   Pagination,
+  Popover,
   Dialog,
   Input,
   Radio,
@@ -31,6 +32,7 @@ Vue.use(Dropdown)
 Vue.use(DropdownMenu)
 Vue.use(DropdownItem)
 Vue.use(Pagination)
+Vue.use(Popover)
 Vue.use(Dialog)
 Vue.use(Input)
 Vue.use(Radio)
