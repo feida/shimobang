@@ -36,6 +36,8 @@
       <el-collapse-item v-for=" (item,index) in tempShopData" :title="item.shop_category" :key="'shop_category'+ index" :name="index + 1">
         <div v-for=" (m,n) in item.data_list" :key="'data_list' + n" class="list">
           <span class="shop_name">{{ m.shop_name }}</span>
+          <span class="shop_name">规格: {{ m.standard }}</span>
+          <span class="shop_name">价格: {{ m.price }}</span>
           <div>
             <el-button round type="primary" size="mini" @click="talkPrice(m)">议价</el-button>
             <el-button round type="danger" size="mini" @click="buy_goods(m)">立即采购</el-button>
@@ -92,6 +94,15 @@
         <el-form-item label="数量" prop="count">
           <el-input v-model="talkPriceData.count"/>
         </el-form-item>
+        <el-form-item label="包装" prop="packing">
+          <el-input v-model="talkPriceData.packing"/>
+        </el-form-item>
+        <el-form-item label="物流方式">
+          <el-radio-group v-model="talkPriceData.logistics_mode">
+            <el-radio :label="0">自提</el-radio>
+            <el-radio :label="1">送到</el-radio>
+          </el-radio-group>
+        </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button @click="cancelTalk">取 消</el-button>
@@ -118,8 +129,8 @@
         </el-form-item>
         <el-form-item label="物流方式">
           <el-radio-group v-model="buyData.logistics_mode">
-            <el-radio :label="0">到付</el-radio>
-            <el-radio :label="1">寄付</el-radio>
+            <el-radio :label="0">自提</el-radio>
+            <el-radio :label="1">送到</el-radio>
           </el-radio-group>
         </el-form-item>
         <el-form-item label="备注">
@@ -156,7 +167,10 @@ export default {
         count: '',
         shop_id: '',
         customer_id: '',
-        shop_name: ''
+        shop_name: '',
+        packing: '',
+        logistics_mode: 0,
+
       },
       buyData: {
         customer_id: '',
@@ -290,7 +304,9 @@ export default {
         count: '',
         shop_id: '',
         customer_id: '',
-        shop_name: ''
+        shop_name: '',
+        packing: '',
+        logistics_mode: 0,
       }
     },
 

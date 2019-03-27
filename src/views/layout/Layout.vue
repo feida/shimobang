@@ -3,7 +3,7 @@
     <navbar/>
     <div style="height: 50px; background: skyblue;position: relative;">
       <div style=" max-width: 1170px; margin: 0 auto; overflow-x: auto; overflow-y: hidden; height: 50px; ">
-        <div style="width: 1028px; height: 50px; display: inline-block;">
+        <div style="width: 1108px; height: 50px; display: inline-block;">
           <div class="menu_wrap" style="border-left: 1px solid #eee;">
             <el-popover
               placement="bottom"
@@ -25,30 +25,22 @@
             <span class="menu_title">首页</span>
           </div>
           <div class="menu_wrap">
-            <span class="menu_title" >平台介绍</span>
+            <a :href="info.introduce">
+              <span class="menu_title">平台介绍</span>
+            </a>
+          </div>
+          <div class="menu_wrap" @click="pushMore('1')">
+            <span class="menu_title" >快讯行情</span>
           </div>
           <div class="menu_wrap">
-            <el-dropdown trigger="hover">
-              <span class="menu_title" >快讯行情</span>
-              <el-dropdown-menu slot="dropdown">
-                <el-dropdown-item v-for="item in news_categoryData" :key="item.news_category_id" >
-                  <span @click="pushMore(item.news_category_id)">{{ item.news_category }}</span>
-                </el-dropdown-item>
-              </el-dropdown-menu>
-            </el-dropdown>
+            <a :href="info.mt_school">
+              <span class="menu_title">盟碳学院</span>
+            </a>
           </div>
           <div class="menu_wrap">
-            <el-dropdown trigger="hover">
+            <a :href="info.contact_us">
               <span class="menu_title">联系我们</span>
-              <el-dropdown-menu slot="dropdown">
-                <el-dropdown-item >
-                  <span>联系我们</span>
-                </el-dropdown-item>
-                <el-dropdown-item >
-                  <span>意见反馈</span>
-                </el-dropdown-item>
-              </el-dropdown-menu>
-            </el-dropdown>
+            </a>
           </div>
         </div>
 
@@ -191,7 +183,7 @@ export default {
 
   .menu_wrap {
     display: inline-block;
-    width: 200px;
+    width: 180px;
     line-height: 50px;
     text-align: center;
     border-right: 1px solid #eee;
