@@ -3,7 +3,7 @@
     <navbar/>
     <div style="height: 50px; background: skyblue;position: relative;">
       <div style=" max-width: 1170px; margin: 0 auto; overflow-x: auto; overflow-y: hidden; height: 50px; ">
-        <div style="width: 1018px; height: 50px; display: inline-block;">
+        <div style="width: 1028px; height: 50px; display: inline-block;">
           <div class="menu_wrap" style="border-left: 1px solid #eee;">
             <el-popover
               placement="bottom"
