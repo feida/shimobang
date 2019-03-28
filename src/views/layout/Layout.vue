@@ -25,7 +25,7 @@
             <span class="menu_title">首页</span>
           </div>
           <div class="menu_wrap">
-            <a :href="info.introduce">
+            <a :href="info.introduce" target="_blank">
               <span class="menu_title">平台介绍</span>
             </a>
           </div>
@@ -33,12 +33,12 @@
             <span class="menu_title" >快讯行情</span>
           </div>
           <div class="menu_wrap">
-            <a :href="info.mt_school">
+            <a :href="info.mt_school" target="_blank">
               <span class="menu_title">盟碳学院</span>
             </a>
           </div>
           <div class="menu_wrap">
-            <a :href="info.contact_us">
+            <a :href="info.contact_us" target="_blank">
               <span class="menu_title">联系我们</span>
             </a>
           </div>
@@ -193,6 +193,10 @@ export default {
     color: #fff;
     cursor: pointer;
     font-weight: 600;
+  }
+
+  .menu_title:hover {
+    cursor: pointer;
   }
   .footer {
     margin-top: 10px;

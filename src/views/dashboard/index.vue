@@ -35,9 +35,9 @@
     <el-collapse v-model="activeNames" accordion @change="handleChange">
       <el-collapse-item v-for=" (item,index) in tempShopData" :title="item.shop_category" :key="'shop_category'+ index" :name="index + 1">
         <div v-for=" (m,n) in item.data_list" :key="'data_list' + n" class="list">
-          <span class="shop_name">{{ m.shop_name }}</span>
-          <span class="shop_name">规格: {{ m.standard }}</span>
-          <span class="shop_name">价格: {{ m.price }}</span>
+          <span class="shop_name"><i>产品:</i> {{ m.shop_name }}</span>
+          <span class="shop_name"> <i>规格:</i> {{ m.standard }}</span>
+          <span class="shop_name"><i>价格:</i> {{ m.price }}</span>
           <div>
             <el-button round type="primary" size="mini" @click="talkPrice(m)">议价</el-button>
             <el-button round type="danger" size="mini" @click="buy_goods(m)">立即采购</el-button>
@@ -169,7 +169,7 @@ export default {
         customer_id: '',
         shop_name: '',
         packing: '',
-        logistics_mode: 0,
+        logistics_mode: 0
 
       },
       buyData: {
@@ -306,7 +306,7 @@ export default {
         customer_id: '',
         shop_name: '',
         packing: '',
-        logistics_mode: 0,
+        logistics_mode: 0
       }
     },
 
@@ -476,6 +476,11 @@ export default {
   .shop_name {
     margin-left: 10px;
   }
+
+  .shop_name i {
+    color: #1482f0;
+    font-style:normal;
+  }
   .list > div {
     position: absolute;
     right: 10px;
@@ -545,8 +550,12 @@ export default {
       height: calc(100vw * 3/4);
     }
 
+    /*.list {*/
+      /*width: 200px;*/
+    /*}*/
+
     .shop_name {
-      display: inline-block;
+      display: block;
       width: 180px;
       vertical-align: center;
     }
