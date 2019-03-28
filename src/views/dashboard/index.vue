@@ -35,9 +35,9 @@
     <el-collapse v-model="activeNames" accordion @change="handleChange">
       <el-collapse-item v-for=" (item,index) in tempShopData" :title="item.shop_category" :key="'shop_category'+ index" :name="index + 1">
         <div v-for=" (m,n) in item.data_list" :key="'data_list' + n" class="list">
-          <span class="shop_name"><i>产品:</i> {{ m.shop_name }}</span>
-          <span class="shop_name"> <i>规格:</i> {{ m.standard }}</span>
-          <span class="shop_name"><i>价格:</i> {{ m.price }}</span>
+          <span class="shop_name shop_name_child1"><i>产品:</i> {{ m.shop_name }}</span>
+          <span class="shop_name shop_name_child2"> <i>规格:</i> {{ m.standard }}</span>
+          <span class="shop_name shop_name_child3"><i>价格:</i> {{ m.price }}</span>
           <div>
             <el-button round type="primary" size="mini" @click="talkPrice(m)">议价</el-button>
             <el-button round type="danger" size="mini" @click="buy_goods(m)">立即采购</el-button>
@@ -580,6 +580,20 @@ export default {
 
     .shop_name {
       line-height: 40px;
+      display: inline-block;
+    }
+
+    .shop_name_child1 {
+      width: 25%;
+      display: inline-block;
+    }
+    .shop_name_child2 {
+      width: 47%;
+      display: inline-block;
+    }
+    .shop_name_child3 {
+      width: 18%;
+      display: inline-block;
     }
 
     .newsTitle {

@@ -13,7 +13,7 @@
                 <div v-for="(item,index) in productData" :key="index" style="border-bottom: 1px solid #f4eded; padding-bottom: 6px">
                   <span style="font-size: 14px; color: #000; display: block; padding: 8px 0;">{{ item['top_ category'] }}</span>
                   <div v-if="item.list">
-                    <span v-for="(m, i) in item.list" :key="i + 'v'" style=" margin-right: 20px; color: #747474;font-size: 13px">{{ m }}</span>
+                    <span v-for="(m, i) in item.list" :key="i + 'v'" style=" margin-right: 20px; color: #747474;font-size: 13px">{{ m.categoryName }}</span>
                   </div>
                 </div>
               </div>
