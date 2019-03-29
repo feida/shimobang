@@ -1,5 +1,6 @@
 const getters = {
   device: state => state.app.device,
+  smallDevice: state => state.app.smallDevice,
   info: state => state.user.info,
   token: state => state.user.token,
   name: state => state.user.name,

@@ -22,11 +22,17 @@ export default {
       const rect = body.getBoundingClientRect()
       return rect.width - RATIO < WIDTH
     },
+    isSmall() {
+      const rect = body.getBoundingClientRect()
+      console.log('rect',rect)
+      return rect.width - RATIO < 414
+    },
     resizeHandler() {
       if (!document.hidden) {
         const isMobile = this.isMobile()
-        console.log('isMobile', isMobile)
+        const isSmall = this.isSmall()
         store.dispatch('ToggleDevice', isMobile ? 'mobile' : 'desktop')
+        store.dispatch('setSmallDevice', isSmall ? true : false)
 
         if (isMobile) {
           // store.dispatch('CloseSideBar', { withoutAnimation: true })

@@ -13,7 +13,7 @@
                 <div v-for="(item,index) in productData" :key="index" style="border-bottom: 1px solid #f4eded; padding-bottom: 6px">
                   <span style="font-size: 14px; color: #000; display: block; padding: 8px 0;">{{ item['top_ category'] }}</span>
                   <div v-if="item.list">
-                    <span v-for="(m, i) in item.list" :key="i + 'v'" style=" margin-right: 20px; color: #747474;font-size: 13px">{{ m.categoryName }}</span>
+                    <span v-for="(m, i) in item.list" :key="i + 'v'" class="product" @click="pushDashBoard">{{ m.categoryName }}</span>
                   </div>
                 </div>
               </div>
@@ -46,8 +46,8 @@
 
       </div>
     </div>
-    <div :style="device == 'mobile' && {'height': '220px'}" style="width: 100%; height: 360px; background: #eee; margin-bottom: 20px; ">
-      <img id="img" :src="info.bg_url" :style="device == 'mobile' && {'height': '220px'}" style="width: 100%; height: 360px" alt="banner">
+    <div :style="smallDevice && {'height': '220px'}" style="width: 100%; height: 460px; background: #eee; margin-bottom: 20px; ">
+      <img id="img" :src="smallDevice ? info.banner_small : info.bg_url" :style="smallDevice && {'height': '220px'}" style="width: 100%; height: 460px" alt="banner">
     </div>
     <div class="main-container">
       <app-main/>
@@ -115,6 +115,9 @@ export default {
     ]),
     device() {
       return this.$store.state.app.device
+    },
+    smallDevice() {
+      return this.$store.state.app.smallDevice
     }
 
   },
@@ -213,5 +216,16 @@ export default {
     width: 100%;
     /*position: absolute;*/
     /*bottom: 10px;*/
+  }
+
+  .product {
+    margin-right: 20px;
+    color: #747474;
+    font-size: 13px;
+  }
+
+  .product:hover {
+    cursor: pointer;
+    color: #1482f0;
   }
 </style>

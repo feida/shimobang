@@ -1,6 +1,5 @@
 <template>
   <div class="dashboard-container">
-    <div style="width: 400px; height: 400px; background: red; position: absolute; top: -400px; left: 0; z-index: 100"/>
     <div class="menuTitle">
       <span class="menuTitle_icon"/>
       <span>价格趋势</span>
@@ -71,15 +70,17 @@
     </div>
     <div style="background-color: #f9f9f9; padding-bottom: 15px">
       <el-row :gutter="20">
-        <el-col v-for="(item, index) in newsListData" :xs="24" :sm="24" :md="12" :lg="12" :xl="12" :key="index">
+        <el-col v-for="(item, index) in newsListData.slice(0,4)" :xs="24" :sm="24" :md="12" :lg="12" :xl="12" :key="index">
           <div class="grid-content bg-purple">
             <div>
               <h4 style="display:inline-block;">  {{ item.news_category }} </h4>
               <span style="float: right; line-height: 60px; color: #3a8ee6; cursor: pointer;" @click="pushMore(item.news_category_id)">更多>></span>
             </div>
-            <div v-for=" ( m, n ) in item.data_list" :key="'list' + n" class="news_wrap" @click="pushDetail(m.news_id)">
-              <span class="newsTitle">{{ m.news_title.length > 20 ? m.news_title.substring(0,20) + '...' : m.news_title }}</span>
-              <span class="newsDate">{{ m.news_date }}</span>
+            <div style="height: 240px;">
+              <div v-for=" ( m, n ) in item.data_list.slice(0,8)" :key="'list' + n" class="news_wrap" @click="pushDetail(m.news_id)">
+                <span class="newsTitle">{{ m.news_title.length > 20 ? m.news_title.substring(0,20) + '...' : m.news_title }}</span>
+                <span class="newsDate">{{ m.news_date }}</span>
+              </div>
             </div>
           </div>
         </el-col>
