@@ -24,7 +24,6 @@ export default {
     },
     isSmall() {
       const rect = body.getBoundingClientRect()
-      console.log('rect',rect)
       return rect.width - RATIO < 414
     },
     resizeHandler() {
