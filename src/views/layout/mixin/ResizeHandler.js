@@ -14,6 +14,7 @@ export default {
     const isMobile = this.isMobile()
     if (isMobile) {
       store.dispatch('ToggleDevice', 'mobile')
+      store.dispatch('setSmallDevice', true)
       // store.dispatch('CloseSideBar', { withoutAnimation: true })
     }
   },
@@ -24,7 +25,7 @@ export default {
     },
     isSmall() {
       const rect = body.getBoundingClientRect()
-      return rect.width - RATIO < 414
+      return rect.width - RATIO < 500
     },
     resizeHandler() {
       if (!document.hidden) {

@@ -46,7 +46,7 @@
 
       </div>
     </div>
-    <div :style="smallDevice && {'height': '220px'}" style="width: 100%; height: 460px; background: #eee; margin-bottom: 20px; ">
+    <div :style="smallDevice && {'height': '220px'}" style="width: 100%; height: 460px; margin-bottom: 20px; ">
       <img id="img" :src="smallDevice ? info.banner_small : info.bg_url" :style="smallDevice && {'height': '220px'}" style="width: 100%; height: 460px" alt="banner">
     </div>
     <div class="main-container">

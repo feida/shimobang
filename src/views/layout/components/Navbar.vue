@@ -1,7 +1,7 @@
 <template>
   <div class="navbar" >
-    <span style=" display: inline-block;width: 250px;height: 80px;margin-top: 10px; margin-left: 20px " @click="pushDashBoard">
-      <img :src="info.logo_url" style="width: 250px;height: 80px; " alt="LOGO">
+    <span :style="smallDevice && {'width': '80px'}" style="display: inline-block;width: 250px;height: 80px;margin-top: 10px; margin-left: 20px;">
+      <img id="img" :src="smallDevice ? info.logo_small : info.logo_url" :style="smallDevice && {'width': '80px'}" style="width: 250px;height: 80px;" alt="banner">
     </span>
     <div class="avatar-container">
       <a v-if="username" href="http://customer.mtsh.cn" target="_blank" style="color: red;font-size: 14px;">个人中心:<span style="color:#3a8ee6">{{ username }}</span></a>
@@ -39,7 +39,10 @@ export default {
     ...mapGetters([
       'info',
       'device'
-    ])
+    ]),
+    smallDevice() {
+      return this.$store.state.app.smallDevice
+    }
   },
   created() {
     // this.$store.dispatch('GetUserInfo')
