@@ -32,7 +32,7 @@ export default {
         const isMobile = this.isMobile()
         const isSmall = this.isSmall()
         store.dispatch('ToggleDevice', isMobile ? 'mobile' : 'desktop')
-        store.dispatch('setSmallDevice', isSmall ? true : false)
+        store.dispatch('setSmallDevice', !!isSmall)
 
         if (isMobile) {
           // store.dispatch('CloseSideBar', { withoutAnimation: true })
