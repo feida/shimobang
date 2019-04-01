@@ -8,7 +8,7 @@
         <div style="text-align: center;">
           <el-row>
             <el-col :span="16" class="hot_product">产品</el-col>
-            <el-col :span="8" class="hot_product">价格 元/(吨)</el-col>
+            <el-col :span="8" class="hot_product">价格 (元/吨)</el-col>
           </el-row>
           <el-row v-for=" item in hotProductData" :key="item.name">
             <el-col :span="16" class="hot_product">{{ item.name }}</el-col>
