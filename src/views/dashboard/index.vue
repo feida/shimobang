@@ -250,9 +250,6 @@ export default {
 
     // 议价
     talkPrice(m) {
-      // this.dialogFormVisible = true
-      // this.talkPriceData.customer_id = '2'
-      // this.talkPriceData.shop_id = m.shop_id
       getUserInfo().then(res => {
         if (res.code === '0000') {
           this.dialogFormVisible = true
@@ -313,11 +310,6 @@ export default {
 
     // 采购
     buy_goods(m) {
-      // this.buyData.customer_id = '2'
-      // this.buyData.goods_id = m.shop_id
-      // this.buyData.goods_name = m.shop_name
-      // this.buyData.price = m.price
-      // this.dialogFormVisible1 = true
       getUserInfo().then(res => {
         if (res.code === '0000') {
           this.buyData.customer_id = res.data.customer_id

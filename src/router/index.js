@@ -31,7 +31,7 @@ export const constantRouterMap = [
     name: 'Dashboard',
     hidden: true,
     children: [{
-      path: 'dashboard',
+      path: 'dashboard', // 首页
       component: () => import('@/views/dashboard/index')
     }]
   },
@@ -40,14 +40,14 @@ export const constantRouterMap = [
     component: Layout,
     children: [
       {
-        path: 'index/:news_category_id',
+        path: 'index/:news_category_id',   //新闻列表
         name: 'newsMore',
         component: () => import('@/views/newsMore/index')
       }
     ]
   },
   {
-    path: '/newsDetail',
+    path: '/newsDetail',    // 新闻详情
     component: Layout,
     children: [
       {
@@ -57,7 +57,6 @@ export const constantRouterMap = [
       }
     ]
   },
-  // { path: '/upload', component: () => import('@/views/upload/index'), hidden: true },
   { path: '/404', component: () => import('@/views/404'), hidden: true },
   { path: '*', redirect: '/404', hidden: true }
 ]

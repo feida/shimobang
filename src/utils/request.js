@@ -5,7 +5,6 @@ axios.defaults.withCredentials = true
 // 创建axios实例
 const service = axios.create({
   baseURL: process.env.BASE_API, // api 的 base_url
-  // baseURL: 'http://139.196.222.42:5009', // api 的 base_url
   timeout: 20000 // 请求超时时间
 })
 
@@ -49,9 +48,6 @@ service.interceptors.response.use(
 
         case 401:
           err.message = '未授权，请登录'
-          store.dispatch('FedLogOut').then(() => {
-            location.reload()// 为了重新实例化vue-router对象 避免bug
-          })
           break
 
         case 403:
