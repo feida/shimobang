@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { Message } from 'element-ui'
-import store from '../store'
+// import store from '../store'
 axios.defaults.withCredentials = true
 // 创建axios实例
 const service = axios.create({

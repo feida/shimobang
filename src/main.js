@@ -66,7 +66,6 @@ import store from './store'
 import '@/icons' // icon
 import '@/permission' // permission control
 
-
 Vue.use(MetaInfo)
 Vue.config.productionTip = false
 

@@ -40,14 +40,14 @@ export const constantRouterMap = [
     component: Layout,
     children: [
       {
-        path: 'index/:news_category_id',   //新闻列表
+        path: 'index/:news_category_id', // 新闻列表
         name: 'newsMore',
         component: () => import('@/views/newsMore/index')
       }
     ]
   },
   {
-    path: '/newsDetail',    // 新闻详情
+    path: '/newsDetail', // 新闻详情
     component: Layout,
     children: [
       {

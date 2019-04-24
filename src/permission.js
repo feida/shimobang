@@ -9,8 +9,6 @@ router.beforeEach((to, from, next) => {
   }).catch((err) => {
     next(err)
   })
-
-
 })
 
 router.afterEach(() => {
