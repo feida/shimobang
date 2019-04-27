@@ -38,7 +38,7 @@
           <span class="shop_name shop_name_child2"> <i>规格:</i> {{ m.standard }}</span>
           <span class="shop_name shop_name_child3"><i>价格:</i> {{ m.price }}</span>
           <div>
-            <el-button round type="primary" size="mini" @click="talkPrice(m)">议价</el-button>
+            <!--<el-button round type="primary" size="mini" @click="talkPrice(m)">议价</el-button>-->
             <el-button round type="danger" size="mini" @click="buy_goods(m)">立即采购</el-button>
           </div>
         </div>
