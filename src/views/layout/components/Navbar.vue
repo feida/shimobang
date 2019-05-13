@@ -57,7 +57,7 @@ export default {
       })
     },
     push() {
-      window.open(process.env.BASE_API + '/toLogin?callbackUrl=http://www.mengtan.com.cn', '_self')
+      window.open(process.env.BASE_API + '/toLogin?callbackUrl=http://www.mtsh.cn', '_self')
     },
     // 首页
     pushDashBoard() {
